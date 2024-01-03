@@ -1,0 +1,55 @@
+v1.00:
+- Create
+
+v1.01.1:
+- Add restart fw, power cycle cmd
+
+v1.01.2:
+- Add kill, watchlog, p71_read cmd
+
+v1.01.2:
+- Fix bug
+
+v1.01.3:
+- Fix bug
+
+v1.01.4:
+- Fix bug
+
+v1.02.0:
+- Add API en/disable, retry last cmd, get task for Atlanta
+- Fix issue can not execute cmd for Atlanta
+
+v1.02.1:
+- Add unpause, unfault cmd for Atlanta
+
+v1.02.2: pass: Fsoft@123
+- Fix bug
+- Add command in query mode: quick ignore fault (j), connection (k), pause (l)
+- Add command in command mode: power cycle all bot (work with 2 bot, not test will all field), unpause all pause bots, retry all idle bots, unfault all faulted bots, fix (reconnect, unpause, unfault, retry) all faulted bots, get log of a robot and save in fw_log\<date>\
+- Add sound when a thread get crash/exception
+
+v1.02.3:
+- Fix bug (still more bug :D)
+- Get log: using thead so it won't block futher command
+
+
+v1.02.4:
+- Fix bug (still more bug :D)
+- Improve thread to analyze idle bot
+- Fix issues can't download log from robot
+- Modify power cycle all robot: will ask if you want to power cycle new M4 bot
+- Fix issues which is you can not unpause bot in Atlanta
+
+v1.02.5:
+- Fix bug: crash after user fw cmd
+- Change: Modify function which checks FW type due to some bots have 2 fw file but only run 1
+
+v1.02.6:
+- Fix bug: can't enter command mode when Caps Lock or Shift is pressed
+- Fix bug which you can ignore a bot twice
+
+----------------------------------------------------------------------------------------
+Plan:
+v1.03.0:
+- Notify wifi issue: NoHB, Dead
