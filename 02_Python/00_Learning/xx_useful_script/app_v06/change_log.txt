@@ -1,0 +1,24 @@
+v1.00:
+- Create
+
+v1.01.1:
+- Add restart fw, power cycle cmd
+
+v1.01.2:
+- Add kill, watchlog, p71_read cmd
+
+v1.01.2:
+- Fix bug
+
+v1.01.3:
+- Fix bug
+
+v1.01.4:
+- Fix bug
+
+v1.02.0:
+- Add API en/disable, retry last cmd, get task for Atlanta
+- Fix issue can not execute cmd for Atlanta
+
+v1.02.1:
+- Add unpause, unfault cmd for Atlanta
