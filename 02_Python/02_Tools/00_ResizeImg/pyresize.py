@@ -6,7 +6,7 @@ from unidecode import unidecode
 import shutil
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
-IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_IMG_DIR/"
+IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR/"
 if not (os.path.isdir(IN_IMG_DIR)):
     print("Image dir does not exist!")
     exit(-1)
@@ -18,7 +18,7 @@ elif len(os.listdir(OUT_IMG_DIR)) != 0:
     print("Empty out dir")
     print(os.listdir(OUT_IMG_DIR))
     for _dir in os.listdir(OUT_IMG_DIR):
-        print(_dir)
+        # print(_dir)
         shutil.rmtree(OUT_IMG_DIR + _dir)
 
 
