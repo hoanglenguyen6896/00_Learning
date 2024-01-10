@@ -6,8 +6,8 @@ from unidecode import unidecode
 import shutil
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
-IMG_DIR = SCRIPT_ABS_PATH + "/IMG_DIR/"
-if not (os.path.isdir(IMG_DIR)):
+IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_IMG_DIR/"
+if not (os.path.isdir(IN_IMG_DIR)):
     print("Image dir does not exist!")
     exit(-1)
 OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR/"
@@ -25,10 +25,10 @@ elif len(os.listdir(OUT_IMG_DIR)) != 0:
 class all_image_stuff:
     def __init__(self):
         self.all_dir = []
-        _tmp_all_dir = os.listdir(IMG_DIR)
+        _tmp_all_dir = os.listdir(IN_IMG_DIR)
         for _dir in _tmp_all_dir:
-            # print(_dir, os.path.isdir(IMG_DIR + _dir))
-            if (os.path.isdir(IMG_DIR + _dir)):
+            # print(_dir, os.path.isdir(IN_IMG_DIR + _dir))
+            if (os.path.isdir(IN_IMG_DIR + _dir)):
                 # print(f"{_dir} is dir")
                 self.all_dir.append(_dir)
                 pass
@@ -45,7 +45,7 @@ class all_image_stuff:
         self.all_img_in_dir = []
         for _dir in self.all_dir:
             try:
-                self.all_img_in_dir.append(os.listdir(IMG_DIR + _dir))
+                self.all_img_in_dir.append(os.listdir(IN_IMG_DIR + _dir))
                 if not os.path.isdir(OUT_IMG_DIR + _dir):
                     os.mkdir(OUT_IMG_DIR + _dir)
                 else:
@@ -120,7 +120,7 @@ class all_image_stuff:
             self._resize_img_sub(_dir_name, _in, _out)
     def _resize_all(self):
         for _dir_name in self.all_dir:
-            _full_relative_input_dir = IMG_DIR + _dir_name
+            _full_relative_input_dir = IN_IMG_DIR + _dir_name
             _full_relative_output_dir = OUT_IMG_DIR + _dir_name
             self._resize_img_in_a_dir(_dir_name, _full_relative_input_dir, _full_relative_output_dir)
 
