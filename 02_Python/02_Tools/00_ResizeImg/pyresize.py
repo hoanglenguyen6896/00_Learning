@@ -4,127 +4,143 @@ import piexif
 import os
 from unidecode import unidecode
 import shutil
+import argparse
+
+DEFAULT_WIDTH = 750
+
+IMG_EXIF_DES = {
+    "Title":          270, # Title and subject encode utf-8
+    "Subject":        40095, # Subject
+    "Rating":         18246, # Rating1 int
+    "RatingPercent":  18249, # Rating2 int
+    "Keywords":       40094, # Tags encode utf-16
+    "Comment":        40092, #Commentsencode utf-16
+}
+
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
 IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR/"
-if not (os.path.isdir(IN_IMG_DIR)):
-    print("Image dir does not exist!")
-    exit(-1)
 OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR/"
-if not (os.path.isdir(OUT_IMG_DIR)):
-    print("Creating output directory " + OUT_IMG_DIR)
-    os.mkdir(OUT_IMG_DIR)
-elif len(os.listdir(OUT_IMG_DIR)) != 0:
-    print("Empty out dir")
-    print(os.listdir(OUT_IMG_DIR))
-    for _dir in os.listdir(OUT_IMG_DIR):
-        # print(_dir)
-        shutil.rmtree(OUT_IMG_DIR + _dir)
-
-
 class all_image_stuff:
-    def __init__(self):
+    def __init__(self, input_dir, output_dir):
+        self.indir = input_dir
+        if not (os.path.isdir(self.indir)):
+            print("Image unput directory does not exist!")
+            exit(-1)
+        self.outdir = output_dir
+        if not (os.path.isdir(self.outdir)):
+            print("Creating output directory " + self.outdir)
+            os.mkdir(self.outdir)
+        elif len(os.listdir(self.outdir)) != 0:
+            print("Empty", self.outdir)
+            for _dir in os.listdir(self.outdir):
+                # print(_dir)
+                try:
+                    shutil.rmtree(self.outdir + _dir)
+                except NotADirectoryError as __tmp:
+                    print("Skip", _dir)
+                except Exception as _tmp:
+                    print("Something wrong when clean", self.outdir, _tmp)
         self.all_dir = []
-        _tmp_all_dir = os.listdir(IN_IMG_DIR)
+        # list all dir in input directory
+        _tmp_all_dir = os.listdir(self.indir)
         for _dir in _tmp_all_dir:
-            # print(_dir, os.path.isdir(IN_IMG_DIR + _dir))
-            if (os.path.isdir(IN_IMG_DIR + _dir)):
-                # print(f"{_dir} is dir")
+            if (os.path.isdir(self.indir + _dir)):
+                # Get subdir only
                 self.all_dir.append(_dir)
+                if not os.path.isdir(self.outdir + _dir):
+                    os.mkdir(self.outdir + _dir)
+                else:
+                    print("Output directory should be empty!!!")
+                    exit(-1)
                 pass
             else:
-                # self.all_dir.remove(_dir)
-                # print(f"{_dir} is not dir")
                 pass
         if len(self.all_dir) == 0:
             print("Input dir is empty!!!")
             exit(-1)
-        # self.all_dir_minus =  [unidecode(x.replace(" ", "-")).lower() for x in self.all_dir]
         pass
-    def list_all_image(self):
-        self.all_img_in_dir = []
-        for _dir in self.all_dir:
-            try:
-                self.all_img_in_dir.append(os.listdir(IN_IMG_DIR + _dir))
-                if not os.path.isdir(OUT_IMG_DIR + _dir):
-                    os.mkdir(OUT_IMG_DIR + _dir)
-                else:
-                    print("Output directory should be empty!!!")
-                    exit(-1)
-            except NotADirectoryError:
-                pass
-            except Exception as tmp:
-                print("Something wrong!!!")
-                print(tmp)
-                exit(-1)
-    def _resize_img_sub(self, _dir_name, in_file, out_file):
-        # print(in_file, out_file)
-        image = Image.open(in_file)
-        if image.mode != "RGB":
-            rgb_img = image.convert("RGB")
-        else:
-            rgb_img = image
-        rgb_img.thumbnail((750,750))
 
-        img_des = {
-            270: "Title", # Title and subject encode utf-8
-            40095: "Subject", # Subject
-            18246: "Rating", # Rating1 int
-            18249: "RatingPercent", # Rating2 int
-            40094: "Keywords", # Tags encode utf-16
-            40092: "Comment", #Commentsencode utf-16
-        }
-
-        try:
-            exifdata = piexif.load(rgb_img.info["exif"])
-        except KeyError:
-            exifdata = {'0th': {}, 'Exif': {}, 'GPS': {}, 'Interop': {}, '1st': {}, 'thumbnail': None}
-        except:
-            print("Something wrong with exif!!!")
-            exit(-1)
-        # print(exifdata['Exif'])
-        # exit()
-        exifdata['Exif'] = {}
-
-        exifdata['0th'][270] = str.encode(_dir_name) # Set both title and subject
-        exifdata['0th'][18246] = 5  # Set rating
-        exifdata['0th'][18249] = 99 # Set rating, need both
-        # Getutf-16 of string
+    # Add description (title, subject, rate, tags, comment) to image
+    def _set_img_des_from_exif(self, _dir_name, exifdata):
+        # Get utf-16 of string
+        # Append ending to table_result fffeabcd > abcd
         table_word_16 = []
         for item in _dir_name:
             table_word_16.append(item.encode('utf-16').hex().replace('fffe',''))
-
+        # Split into string size 2
         table_word_8 = []
         for word16 in table_word_16:
             table_word_8.append(word16[0:2])
             table_word_8.append(word16[2:])
-
+        # Convert string size 2 to hex int
         table_result = []
         for word8 in table_word_8:
             table_result.append(int(word8, 16))
-        # Append ending to  table_result
+        # remove exif data if exist as some of them may contain can't parse info
+        exifdata['Exif'] = {}
+        exifdata['0th'][IMG_EXIF_DES["Title"]] = str.encode(_dir_name) # Set both title and subject
+        exifdata['0th'][IMG_EXIF_DES["Rating"]] = 5  # Set rating
+        exifdata['0th'][IMG_EXIF_DES["RatingPercent"]] = 99 # Set rating, need both
         table_result.extend((0, 0))
-        exifdata['0th'][40094] = table_result
-        exifdata['0th'][40092] = table_result
+        exifdata['0th'][IMG_EXIF_DES["Keywords"]] = table_result
+        exifdata['0th'][IMG_EXIF_DES["Comment"]] = table_result
+        return exifdata
 
-        exif_bytes = piexif.dump(exifdata)
-        # rgb_img.save(out_file)
-        rgb_img.save(out_file, exif=exif_bytes)
-        image.close()
-        rgb_img.close()
-        # exit(-1)
+    # Resize a single image
+    def _resize_img_sub(self, _dir_name, in_file, out_file):
+        # print(in_file, out_file)
+        with Image.open(in_file) as image:
+            image = Image.open(in_file)
+            if image.mode != "RGB":
+                rgb_img = image.convert("RGB")
+            else:
+                rgb_img = image
+            # Enlarge
+            if rgb_img.width < DEFAULT_WIDTH:
+                _ratio = rgb_img.width/DEFAULT_WIDTH
+                rgb_img = rgb_img.resize((DEFAULT_WIDTH, int(_ratio*rgb_img.height)), Image.Resampling.LANCZOS)
+            # Reduce
+            elif rgb_img.width > DEFAULT_WIDTH:
+                rgb_img.thumbnail((DEFAULT_WIDTH, DEFAULT_WIDTH))
+
+            try:
+                exifdata = piexif.load(rgb_img.info["exif"])
+            except KeyError:
+                exifdata = {'0th': {}, 'Exif': {}, 'GPS': {}, 'Interop': {}, '1st': {}, 'thumbnail': None}
+            except:
+                print("Something wrong with exif!!!")
+                exit(-1)
+            # Dunp human readable exif to image exif
+            exif_bytes = piexif.dump(self._set_img_des_from_exif(_dir_name, exifdata))
+            # Save image with dumped exif
+            rgb_img.save(out_file, exif=exif_bytes)
+
+    # Resize all images in a single directory
     def _resize_img_in_a_dir(self, _dir_name, _full_relative_input_dir, _full_relative_output_dir):
         for _img in os.listdir(_full_relative_input_dir):
             _in = _full_relative_input_dir + "/" + _img
             _out = _full_relative_output_dir + "/" + unidecode(_dir_name.replace(" ", "-").lower()) + " (" + _img.split(".")[0] + ")." + _img.split(".")[1]
             self._resize_img_sub(_dir_name, _in, _out)
+
+    # Resize all images in all subdirectories of input directory
     def _resize_all(self):
         for _dir_name in self.all_dir:
-            _full_relative_input_dir = IN_IMG_DIR + _dir_name
-            _full_relative_output_dir = OUT_IMG_DIR + _dir_name
+            _full_relative_input_dir = self.indir + _dir_name
+            _full_relative_output_dir = self.outdir + _dir_name
             self._resize_img_in_a_dir(_dir_name, _full_relative_input_dir, _full_relative_output_dir)
 
 if __name__ == '__main__':
-    tmp = all_image_stuff()
-    tmp.list_all_image()
+    def argparse_init():
+        parser = argparse.ArgumentParser(
+                    prog=__file__,
+                    description='Resize all images in subdir of IN_DIR, output to OUT_DIR')
+        parser.add_argument('-i', '--input', default=IN_IMG_DIR,
+                            help="Path to input directory where you save all images in subdirs")
+        parser.add_argument('-o', '--output', default=OUT_IMG_DIR,
+                            help="Path to output directory")
+        return parser.parse_args()
+    argv = argparse_init()
+
+    tmp = all_image_stuff(argv.input, argv.output)
     tmp._resize_all()
