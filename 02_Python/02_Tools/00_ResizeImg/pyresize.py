@@ -1,5 +1,5 @@
 from PIL import Image # equal "import PIL.Image", you can't import PIL then invoke PIL.Image
-from PIL.ExifTags import TAGS
+import textwrap3
 import piexif
 import os
 from unidecode import unidecode
@@ -94,10 +94,11 @@ class all_image_stuff:
         focus_key.extend((0, 0))
         exifdata['0th'][IMG_EXIF_DES["Keywords"]] = tuple(focus_key)
         exifdata['0th'][IMG_EXIF_DES["Comment"]] = tuple(focus_key)
-        author = self._convert_utf16_to_hex_exif(_author)
-        author.extend((0, 0))
-        exifdata['0th'][IMG_EXIF_DES["Author_str"]] = str.encode(_author)
-        exifdata['0th'][IMG_EXIF_DES["Author_utf16"]] = tuple(author)
+        if self.author != None:
+            author = self._convert_utf16_to_hex_exif(_author)
+            author.extend((0, 0))
+            exifdata['0th'][IMG_EXIF_DES["Author_str"]] = str.encode(_author)
+            exifdata['0th'][IMG_EXIF_DES["Author_utf16"]] = tuple(author)
         # print(exifdata)
         return exifdata
 
@@ -149,13 +150,22 @@ if __name__ == '__main__':
     def argparse_init():
         parser = argparse.ArgumentParser(
                     prog=__file__,
-                    description='Resize all images in subdir of IN_DIR, output to OUT_DIR')
+                    description='Resize all images in subdir of IN_DIR, output to OUT_DIR',
+                    formatter_class=argparse.RawDescriptionHelpFormatter,
+                    epilog=textwrap3.dedent('''
+                        Guide:
+                            If you doesn't provide input and output, it will be set to default value:
+                                Input as IN_DIR
+                                Output as OUT_DIR
+                            With input and output part
+                                python pyresize.py -a YODY.VN -i D:/work/INPUT -o D:/work/OUTPUT
+                        '''))
         parser.add_argument('-i', '--input', default=IN_IMG_DIR,
-                            help="Path to input directory where you save all images in subdirs")
+                            help="Path to input directory where you save all origin images in subdirs")
         parser.add_argument('-o', '--output', default=OUT_IMG_DIR,
                             help="Path to output directory")
-        parser.add_argument('-a', '--author', default="",
-                            help="Author")
+        parser.add_argument('-a', '--author', default=None,
+                            help="Author to be set")
         return parser.parse_args()
     argv = argparse_init()
 
