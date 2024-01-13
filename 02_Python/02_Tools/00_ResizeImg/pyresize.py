@@ -9,14 +9,14 @@ import argparse
 TARGET_WIDTH = 750
 
 IMG_EXIF_DES = {
-    "Title":          270, # Title and subject encode utf-8
+    "Title":          270,   # Title and subject encode utf-8
     "Subject":        40095, # Subject
     "Rating":         18246, # Rating1 int
     "RatingPercent":  18249, # Rating2 int
     "Keywords":       40094, # Tags encode utf-16
-    "Comment":        40092, #Commentsencode utf-16
-    "Author_str":         315,
-    "Author_utf16":         40093,
+    "Comment":        40092, # Commentsencode utf-16
+    "Author_str":     315,   # Author string encode byte
+    "Author_utf16":   40093, # Author string encode utf-16
 }
 
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
