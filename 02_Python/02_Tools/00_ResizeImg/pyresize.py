@@ -6,7 +6,7 @@ from unidecode import unidecode
 import shutil
 import argparse
 
-DEFAULT_WIDTH = 750
+TARGET_WIDTH = 750
 
 IMG_EXIF_DES = {
     "Title":          270, # Title and subject encode utf-8
@@ -97,12 +97,12 @@ class all_image_stuff:
             else:
                 rgb_img = image
             # Enlarge
-            if rgb_img.width < DEFAULT_WIDTH:
-                _ratio = rgb_img.width/DEFAULT_WIDTH
-                rgb_img = rgb_img.resize((DEFAULT_WIDTH, int(_ratio*rgb_img.height)), Image.Resampling.LANCZOS)
+            if rgb_img.width < TARGET_WIDTH:
+                _ratio = TARGET_WIDTH/rgb_img.width
+                rgb_img = rgb_img.resize((TARGET_WIDTH, int(_ratio*rgb_img.height)), Image.Resampling.LANCZOS)
             # Reduce
-            elif rgb_img.width > DEFAULT_WIDTH:
-                rgb_img.thumbnail((DEFAULT_WIDTH, DEFAULT_WIDTH))
+            elif rgb_img.width > TARGET_WIDTH:
+                rgb_img.thumbnail((TARGET_WIDTH, TARGET_WIDTH))
 
             try:
                 exifdata = piexif.load(rgb_img.info["exif"])
