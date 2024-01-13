@@ -15,6 +15,8 @@ IMG_EXIF_DES = {
     "RatingPercent":  18249, # Rating2 int
     "Keywords":       40094, # Tags encode utf-16
     "Comment":        40092, #Commentsencode utf-16
+    "Author_str":         315,
+    "Author_utf16":         40093,
 }
 
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
@@ -22,7 +24,8 @@ SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR/"
 OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR/"
 class all_image_stuff:
-    def __init__(self, input_dir, output_dir):
+    def __init__(self, input_dir, output_dir, author):
+        self.author = author
         self.indir = input_dir
         if not (os.path.isdir(self.indir)):
             print("Image unput directory does not exist!")
@@ -61,12 +64,11 @@ class all_image_stuff:
             exit(-1)
         pass
 
-    # Add description (title, subject, rate, tags, comment) to image
-    def _set_img_des_from_exif(self, _dir_name, exifdata):
+    def _convert_utf16_to_hex_exif(self, target_str):
         # Get utf-16 of string
         # Append ending to table_result fffeabcd > abcd
         table_word_16 = []
-        for item in _dir_name:
+        for item in target_str:
             table_word_16.append(item.encode('utf-16').hex().replace('fffe',''))
         # Split into string size 2
         table_word_8 = []
@@ -77,14 +79,26 @@ class all_image_stuff:
         table_result = []
         for word8 in table_word_8:
             table_result.append(int(word8, 16))
+        return table_result
+
+
+    # Add description (title, subject, rate, tags, comment) to image
+    def _set_img_des_from_exif(self, _dir_name, _author, exifdata):
         # remove exif data if exist as some of them may contain can't parse info
+        # print(exifdata)
+        focus_key = self._convert_utf16_to_hex_exif(_dir_name)
         exifdata['Exif'] = {}
         exifdata['0th'][IMG_EXIF_DES["Title"]] = str.encode(_dir_name) # Set both title and subject
         exifdata['0th'][IMG_EXIF_DES["Rating"]] = 5  # Set rating
         exifdata['0th'][IMG_EXIF_DES["RatingPercent"]] = 99 # Set rating, need both
-        table_result.extend((0, 0))
-        exifdata['0th'][IMG_EXIF_DES["Keywords"]] = table_result
-        exifdata['0th'][IMG_EXIF_DES["Comment"]] = table_result
+        focus_key.extend((0, 0))
+        exifdata['0th'][IMG_EXIF_DES["Keywords"]] = tuple(focus_key)
+        exifdata['0th'][IMG_EXIF_DES["Comment"]] = tuple(focus_key)
+        author = self._convert_utf16_to_hex_exif(_author)
+        author.extend((0, 0))
+        exifdata['0th'][IMG_EXIF_DES["Author_str"]] = str.encode(_author)
+        exifdata['0th'][IMG_EXIF_DES["Author_utf16"]] = tuple(author)
+        # print(exifdata)
         return exifdata
 
     # Resize a single image
@@ -112,7 +126,8 @@ class all_image_stuff:
                 print("Something wrong with exif!!!")
                 exit(-1)
             # Dunp human readable exif to image exif
-            exif_bytes = piexif.dump(self._set_img_des_from_exif(_dir_name, exifdata))
+            exif_bytes = piexif.dump(self._set_img_des_from_exif(_dir_name, self.author, exifdata))
+            # print(exif_bytes)
             # Save image with dumped exif
             rgb_img.save(out_file, exif=exif_bytes)
 
@@ -139,8 +154,10 @@ if __name__ == '__main__':
                             help="Path to input directory where you save all images in subdirs")
         parser.add_argument('-o', '--output', default=OUT_IMG_DIR,
                             help="Path to output directory")
+        parser.add_argument('-a', '--author', default="",
+                            help="Author")
         return parser.parse_args()
     argv = argparse_init()
 
-    tmp = all_image_stuff(argv.input, argv.output)
+    tmp = all_image_stuff(argv.input, argv.output, argv.author)
     tmp._resize_all()
