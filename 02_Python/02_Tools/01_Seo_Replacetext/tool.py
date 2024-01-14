@@ -92,7 +92,7 @@ def write_img_back(_file, _idx):
 	# Replace alt
 	# print(get_similarity_ratio(HEADER_TEXT, PRIMARY_KEY))
 	if get_similarity_ratio(HEADER_TEXT, PRIMARY_KEY) < 0.5:
-		_file.writelines(IMG_TXT_INFO[_idx].replace(REPLACE_TEXT_IMG, PRIMARY_KEY))
+		_file.writelines(IMG_TXT_INFO[_idx].replace(REPLACE_TEXT_IMG, f"{HEADER_TEXT} - {PRIMARY_KEY}"))
 	else:
 		_file.writelines(IMG_TXT_INFO[_idx].replace(REPLACE_TEXT_IMG, HEADER_TEXT))
 	_file.writelines("\n")
@@ -167,4 +167,4 @@ if __name__ == "__main__":
 			else:
 				CURR_LINE += 1
 				out_file.writelines(_line)
-	print(sys.argv)
+	# print(sys.argv)
