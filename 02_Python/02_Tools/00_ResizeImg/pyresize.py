@@ -17,6 +17,7 @@ IMG_EXIF_DES = {
     "Comment":        40092, # Commentsencode utf-16
     "Author_str":     315,   # Author string encode byte
     "Author_utf16":   40093, # Author string encode utf-16
+    "Copyright":      33432, # Copyright
 }
 
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
@@ -108,9 +109,11 @@ class all_image_stuff:
         if self.author != None:
             author = self._convert_utf16_to_hex_exif(_author)
             author.extend((0, 0))
+            exifdata['0th'][IMG_EXIF_DES["Copyright"]] = str.encode(_author)
             exifdata['0th'][IMG_EXIF_DES["Author_str"]] = str.encode(_author)
             exifdata['0th'][IMG_EXIF_DES["Author_utf16"]] = tuple(author)
         # print(exifdata)
+        # exit(-1)
         return exifdata
 
     # Resize a single image
@@ -129,7 +132,7 @@ class all_image_stuff:
                                         Image.Resampling.LANCZOS)
             # Reduce
             elif rgb_img.width > TARGET_WIDTH:
-                rgb_img.thumbnail((TARGET_WIDTH, TARGET_WIDTH))
+                rgb_img.thumbnail((TARGET_WIDTH, 9999))
 
             try:
                 exifdata = piexif.load(rgb_img.info["exif"])
