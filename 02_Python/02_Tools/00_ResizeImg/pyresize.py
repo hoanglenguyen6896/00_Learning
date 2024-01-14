@@ -23,18 +23,28 @@ SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
 IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR/"
 OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR/"
+LOGO_PATH = SCRIPT_ABS_PATH + "/logo/"
 class all_image_stuff:
-    def __init__(self, input_dir, output_dir, author):
+    def __init__(self,
+                 input_dir = IN_IMG_DIR,
+                 output_dir = OUT_IMG_DIR,
+                 author = None,
+                 add_logo = None):
         self.author = author
+        self.add_logo = add_logo
+        self.logo_file = None
         self.indir = input_dir
+        # Check if input directory exists
         if not (os.path.isdir(self.indir)):
             print("Image unput directory does not exist!")
             exit(-1)
         self.outdir = output_dir
+        # Check if output directory exists then create it
         if not (os.path.isdir(self.outdir)):
             print("Creating output directory " + self.outdir)
             os.mkdir(self.outdir)
         elif len(os.listdir(self.outdir)) != 0:
+            # If exists and not empty, empty output directory
             print("Empty", self.outdir)
             for _dir in os.listdir(self.outdir):
                 # print(_dir)
@@ -49,7 +59,7 @@ class all_image_stuff:
         _tmp_all_dir = os.listdir(self.indir)
         for _dir in _tmp_all_dir:
             if (os.path.isdir(self.indir + _dir)):
-                # Get subdir only
+                # Get subdir only then create corresponding output subdir
                 self.all_dir.append(_dir)
                 if not os.path.isdir(self.outdir + _dir):
                     os.mkdir(self.outdir + _dir)
@@ -92,8 +102,9 @@ class all_image_stuff:
         exifdata['0th'][IMG_EXIF_DES["Rating"]] = 5  # Set rating
         exifdata['0th'][IMG_EXIF_DES["RatingPercent"]] = 99 # Set rating, need both
         focus_key.extend((0, 0))
-        exifdata['0th'][IMG_EXIF_DES["Keywords"]] = tuple(focus_key)
-        exifdata['0th'][IMG_EXIF_DES["Comment"]] = tuple(focus_key)
+        exifdata['0th'][IMG_EXIF_DES["Keywords"]] = tuple(focus_key) # Set tags
+        exifdata['0th'][IMG_EXIF_DES["Comment"]] = tuple(focus_key) # Set comment
+        # Set author
         if self.author != None:
             author = self._convert_utf16_to_hex_exif(_author)
             author.extend((0, 0))
@@ -103,10 +114,9 @@ class all_image_stuff:
         return exifdata
 
     # Resize a single image
-    def _resize_img_sub(self, _dir_name, in_file, out_file):
+    def _resize_img_sub(self, _dir_name, in_file, out_file, logo_image):
         # print(in_file, out_file)
         with Image.open(in_file) as image:
-            image = Image.open(in_file)
             if image.mode != "RGB":
                 rgb_img = image.convert("RGB")
             else:
@@ -114,7 +124,9 @@ class all_image_stuff:
             # Enlarge
             if rgb_img.width < TARGET_WIDTH:
                 _ratio = TARGET_WIDTH/rgb_img.width
-                rgb_img = rgb_img.resize((TARGET_WIDTH, int(_ratio*rgb_img.height)), Image.Resampling.LANCZOS)
+                rgb_img = rgb_img.resize((TARGET_WIDTH,
+                                        int(_ratio*rgb_img.height)),
+                                        Image.Resampling.LANCZOS)
             # Reduce
             elif rgb_img.width > TARGET_WIDTH:
                 rgb_img.thumbnail((TARGET_WIDTH, TARGET_WIDTH))
@@ -122,29 +134,86 @@ class all_image_stuff:
             try:
                 exifdata = piexif.load(rgb_img.info["exif"])
             except KeyError:
-                exifdata = {'0th': {}, 'Exif': {}, 'GPS': {}, 'Interop': {}, '1st': {}, 'thumbnail': None}
+                exifdata = {
+                    '0th': {},
+                    'Exif': {},
+                    'GPS': {},
+                    'Interop': {},
+                    '1st': {},
+                    'thumbnail': None
+                }
             except:
                 print("Something wrong with exif!!!")
                 exit(-1)
             # Dunp human readable exif to image exif
-            exif_bytes = piexif.dump(self._set_img_des_from_exif(_dir_name, self.author, exifdata))
+            exif_bytes = piexif.dump(self._set_img_des_from_exif(
+                                        _dir_name,
+                                        self.author,
+                                        exifdata))
             # print(exif_bytes)
             # Save image with dumped exif
+            if logo_image != None:
+                rgb_img.paste(logo_image,
+                                (rgb_img.width - logo_image.width,
+                                    rgb_img.height - logo_image.height),
+                                logo_image)
             rgb_img.save(out_file, exif=exif_bytes)
 
     # Resize all images in a single directory
-    def _resize_img_in_a_dir(self, _dir_name, _full_relative_input_dir, _full_relative_output_dir):
-        for _img in os.listdir(_full_relative_input_dir):
-            _in = _full_relative_input_dir + "/" + _img
-            _out = _full_relative_output_dir + "/" + unidecode(_dir_name.replace(" ", "-").lower()) + " (" + _img.split(".")[0] + ")." + _img.split(".")[1]
-            self._resize_img_sub(_dir_name, _in, _out)
+    def _resize_img_in_a_dir(self, _dir_name,
+                                input_full_path,
+                                output_full_path,
+                                logo_image):
+        for _img in os.listdir(input_full_path):
+            _in = input_full_path + "/" + _img
+            _out = output_full_path + "/" \
+                                + unidecode(
+                                    _dir_name.replace(" ", "-").lower()) \
+                                + " (" + _img.split(".")[0] + ")." \
+                                + _img.split(".")[1]
+            self._resize_img_sub(_dir_name,
+                                    _in,
+                                    _out,
+                                    logo_image)
+
+    def _resize_logo(self):
+        logo_file = None
+        if self.add_logo != None:
+            logo_file_list = os.listdir(LOGO_PATH)
+            for _img_file in logo_file_list:
+                if self.add_logo in _img_file:
+                    self.logo_file = LOGO_PATH + _img_file
+                    break
+            if self.logo_file == None:
+                print("Can't find logo of", self.add_logo)
+            else:
+                logo_file = Image.open(self.logo_file)
+                if logo_file.mode != "RGBA":
+                    rgb_img = logo_file.convert("RGBA")
+                else:
+                    rgb_img = logo_file
+                # Enlarge
+                if rgb_img.width < 150:
+                    _ratio = 150/rgb_img.width
+                    rgb_img = rgb_img.resize((150,
+                                            int(_ratio*rgb_img.height)),
+                                            Image.Resampling.LANCZOS)
+                # Reduce
+                elif rgb_img.width > 150:
+                    rgb_img.thumbnail((150, 150))
+                # rgb_img.putalpha(180)
+        return rgb_img
 
     # Resize all images in all subdirectories of input directory
     def _resize_all(self):
+        logo_image = self._resize_logo()
         for _dir_name in self.all_dir:
-            _full_relative_input_dir = self.indir + _dir_name
-            _full_relative_output_dir = self.outdir + _dir_name
-            self._resize_img_in_a_dir(_dir_name, _full_relative_input_dir, _full_relative_output_dir)
+            input_full_path = self.indir + _dir_name
+            output_full_path = self.outdir + _dir_name
+            self._resize_img_in_a_dir(_dir_name,
+                                        input_full_path,
+                                        output_full_path,
+                                        logo_image)
 
 if __name__ == '__main__':
     def argparse_init():
@@ -166,8 +235,17 @@ if __name__ == '__main__':
                             help="Path to output directory")
         parser.add_argument('-a', '--author', default=None,
                             help="Author to be set")
+        parser.add_argument('--add-logo', choices=(None, 'yody'),
+                            type=str.lower, default=None,
+                            help="Add logo to image (Y/N)?")
         return parser.parse_args()
+
     argv = argparse_init()
 
-    tmp = all_image_stuff(argv.input, argv.output, argv.author)
+    tmp = all_image_stuff(
+        argv.input,
+        argv.output,
+        argv.author,
+        argv.add_logo
+    )
     tmp._resize_all()
