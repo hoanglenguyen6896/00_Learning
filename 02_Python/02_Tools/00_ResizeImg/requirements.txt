@@ -1,3 +1,4 @@
 Pillow
 piexif
 unidecode
+textwrap3
