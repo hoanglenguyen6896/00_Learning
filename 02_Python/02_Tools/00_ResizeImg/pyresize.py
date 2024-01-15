@@ -240,7 +240,7 @@ if __name__ == '__main__':
                             help="Author to be set")
         parser.add_argument('--add-logo', choices=(None, 'yody'),
                             type=str.lower, default=None,
-                            help="Add logo to image (Y/N)?")
+                            help="Add logo to image (yody)?")
         return parser.parse_args()
 
     argv = argparse_init()
