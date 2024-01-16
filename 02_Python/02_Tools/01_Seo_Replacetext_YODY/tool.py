@@ -139,8 +139,22 @@ def link_focus_key_on_line(_line, _key_in_line, link = None):
 		if link == None:
 			print("No link to put", link)
 			return _line
-		else:
-			return _line[:_start] + full_key_link_bold_color + _line[_end:] # replace 1 occurrence
+		return _line[:_start] + full_key_link_bold_color + _line[_end:] # replace 1 occurrence
+	else:
+		return _line
+
+def link_yody(_line, yody_txt):
+	find_result = re.search(yody_txt, _line, re.IGNORECASE)
+	print(find_result)
+	if find_result != None:
+		_start = find_result.start()
+		_end = find_result.end()
+		full_key_link_bold_color = f"<a href=\"http://yody.vn\"><span style=\"color:#3498db;\"><strong>{yody_txt}</strong></span></a>"
+		if re.search(full_key_link_bold_color, _line, re.IGNORECASE):
+			print("No need to link yody")
+			return _line
+		# print(_subline)
+		return _line[:_start] + full_key_link_bold_color + _line[_end:] # replace 1 occurrence
 	else:
 		return _line
 
@@ -183,8 +197,6 @@ if __name__ == "__main__":
 	as f:
 		input_file = f.readlines()
 
-	print(input_file[-1])
-
 	for _line in input_file:
 		if("<img data-thumb" in _line):
 			IMG_TXT_INFO.extend(_line.replace(img_txt_replace,img_txt_to).\
@@ -196,10 +208,28 @@ if __name__ == "__main__":
 		IMG_TXT_INFO[index] = IMG_TXT_INFO[index].\
 										replace("\" /", "\" /></p>")
 	write_idx = 0
+	yody_line = None
+	yody_txt = None
+	input_file_reserve = input_file.copy()
+	input_file_reserve.reverse()
 	with open("OUT.html", \
 						"w", \
 						encoding="utf8") \
 	as out_file:
+		# Get last line that contain YODY or YODY.VN
+		for _line in input_file_reserve:
+			# input_line_idx += 1
+			# print(input_line_idx,"-------------")
+			if (img_txt_replace in _line) or (replace_pattern in _line):
+				continue
+			if "YODY.VN" in _line:
+				yody_txt = "YODY.VN"
+				yody_line = _line
+				break
+			elif "YODY" in _line:
+				yody_txt = "YODY"
+				yody_line = _line
+				break
 		for _line in input_file:
 			get_header(_line)
 			# Remove all image in html
@@ -222,7 +252,10 @@ if __name__ == "__main__":
 					write_idx += 1
 			else:
 				CURR_LINE += 1
-				out_file.writelines(_line)
+				if _line == yody_line:
+					out_file.writelines(link_yody(_line, yody_txt))
+				else:
+					out_file.writelines(_line)
 		if len(IMG_TXT_INFO) > write_idx:
 			print(PRINT_COLOR["ERROR"] + "ERROR: Not all images are used")
 	# print(sys.argv)
