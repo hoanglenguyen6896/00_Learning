@@ -30,7 +30,8 @@ Example of a valid data:
 """
 
 import sys
-
+import re
+import argparse
 import colorama
 from colorama import Fore
 colorama.init(autoreset = True)
@@ -82,6 +83,8 @@ IMG_CMT_INFO=[]
 # Current line
 CURR_LINE = 0
 
+FIRST_FOCUS_KEY_LINK = 0
+
 
 def write_img_back(_file, _idx):
 	global TMP_HEADER
@@ -121,17 +124,66 @@ def get_header(_txt):
 				_HEADER_TEXT = _HEADER_TEXT[1:]
 			HEADER_TEXT = " ".join(_HEADER_TEXT).replace("\n","")
 
+def link_focus_key_on_line(_line, _key_in_line, link = None):
+	global FIRST_FOCUS_KEY_LINK
+	find_result = re.search(_key_in_line, _line, re.IGNORECASE)
+	if find_result != None:
+		FIRST_FOCUS_KEY_LINK = 1
+		_start = find_result.start()
+		_end = find_result.end()
+		full_key_link_bold_color = f"<a href=\"{link}\"><span style=\"color:#3498db;\"><strong>{_line[_start:_end]}</strong></span></a>"
+		if re.search(full_key_link_bold_color, _line, re.IGNORECASE):
+			print("No need to link")
+			return _line
+		# print(_subline)
+		if link == None:
+			print("No link to put", link)
+			return _line
+		else:
+			return _line[:_start] + full_key_link_bold_color + _line[_end:] # replace 1 occurrence
+	else:
+		return _line
+
 if __name__ == "__main__":
-	if len(sys.argv) <= 1:
+	def argparse_init():
+		parser = argparse.ArgumentParser(
+					prog=__file__,
+					description='Replace Image',
+					# formatter_class=argparse.RawDescriptionHelpFormatter,
+					# epilog=textwrap3.dedent('''
+					#     Guide:
+					#         If you doesn't provide input and output, it will be set to default value:
+					#             Input as IN_DIR
+					#             Output as OUT_DIR
+					#         With input and output part
+					#             python pyresize.py -a YODY.VN -i D:/work/INPUT -o D:/work/OUTPUT
+					#     ''')
+					)
+		parser.add_argument('-k', '--key', default=None, required=True,
+		                    help="Focus key")
+		parser.add_argument('-l', '--link', default=None, required=False,
+		                    help="Link for focus key")
+		# parser.add_argument('-a', '--author', default=None,
+		#                     help="Author to be set")
+		# parser.add_argument('--add-logo', choices=(None, 'yody'),
+		#                     type=str.lower, default=None,
+		#                     help="Add logo to image (Y/N)?")
+		return parser.parse_args()
+
+	argv = argparse_init()
+
+	if argv.key == None:
 		print(PRINT_COLOR["ERROR"] + "ERROR: No primary key")
 		exit()
 	else:
-		PRIMARY_KEY = " ".join(sys.argv[1:])
+		PRIMARY_KEY = argv.key
 	with open("IN.html", \
 						"r", \
 						encoding="utf8") \
 	as f:
 		input_file = f.readlines()
+
+	print(input_file[-1])
 
 	for _line in input_file:
 		if("<img data-thumb" in _line):
@@ -150,7 +202,10 @@ if __name__ == "__main__":
 	as out_file:
 		for _line in input_file:
 			get_header(_line)
-			if img_txt_replace in _line:
+			# Remove all image in html
+			if FIRST_FOCUS_KEY_LINK == 0:
+				_line = link_focus_key_on_line(_line, PRIMARY_KEY, argv.link)
+			if (img_txt_replace in _line):
 				continue
 			if replace_pattern in _line:
 				if (HEADER == HEADER_DEFALT):
@@ -162,9 +217,12 @@ if __name__ == "__main__":
 					print(PRINT_COLOR["ERROR"] + "ERROR: No more pictures to replace")
 					print(f"\tPlz check line {CURR_LINE}")
 				else:
+					# Write image with format
 					write_img_back(out_file, write_idx)
 					write_idx += 1
 			else:
 				CURR_LINE += 1
 				out_file.writelines(_line)
+		if len(IMG_TXT_INFO) > write_idx:
+			print(PRINT_COLOR["ERROR"] + "ERROR: Not all images are used")
 	# print(sys.argv)
