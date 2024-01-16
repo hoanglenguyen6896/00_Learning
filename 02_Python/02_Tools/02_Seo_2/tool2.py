@@ -46,6 +46,8 @@ import re
 import difflib
 from difflib import SequenceMatcher
 def get_similarity_ratio(check_str, key_str):
+	if len(check_str.split(" ")) > 5:
+		return 0.55
 	tmp = 0
 	for _w in check_str.split(" "):
 		if _w.lower() in key_str.lower():
@@ -88,6 +90,7 @@ PATTERN_ALT = "alt=\"\""
 PATTERN_ALT_REPLACE = f"alt=\"{TXT_FOR_REPLACEMENT}\""
 
 
+NEW_ALT = ""
 HEADER_REGEX = re.compile(r";\">\w*\S+")
 PRT_HDR_SIZE = "__SIZE"
 PRT_HDR_NUM = "__REPNUM"
@@ -201,6 +204,22 @@ def bold_spec_name(data_str):
 	return _tmp_str
 	pass
 
+def image_process(data_str):
+	comment_img = data_str.split("\" /> ")[1].split("[/caption]")[0]
+	# print(HEADER_TEXT)
+	NEW_ALT = HEADER_TEXT.split(";\">")[1].split(" ")[1:]
+	NEW_ALT = " ".join(NEW_ALT).split("</")[0]
+	print(NEW_ALT)
+	if get_similarity_ratio(NEW_ALT, PRIMARY_KEY) < 0.5:
+		_tmp_str = data_str.replace(comment_img, f"{NEW_ALT} - {PRIMARY_KEY}").replace(PATTERN_ALT, \
+								PATTERN_ALT_REPLACE.replace(\
+									TXT_FOR_REPLACEMENT, f"{NEW_ALT} - {PRIMARY_KEY}"))
+	else:
+		_tmp_str = data_str.replace(comment_img, NEW_ALT).replace(PATTERN_ALT, \
+								PATTERN_ALT_REPLACE.replace(\
+									TXT_FOR_REPLACEMENT, NEW_ALT))
+	return _tmp_str
+
 if __name__ == "__main__":
 	dbg_init()
 
@@ -227,18 +246,30 @@ if __name__ == "__main__":
 						"w", \
 						encoding="utf-8") \
 	as out_file:
+		line_CINK = ""
+		file_rev = file_content.copy()
+		file_rev.reverse()
+		for rev_line in file_rev:
+			if "DR CINK" in rev_line:
+				line_CINK = rev_line
+				break
+		first_focus = 0
 		for _line in file_content:
+			# if (PRIMARY_KEY in _line) and (first_focus == 0):
+			# 	first_focus == 1
+			# 	_line = _line.replace()
 			for hrdcheck in hdr_pattern:
 				if hrdcheck in _line:
-					_line_tmp = coloring_bigger_header(_line)
-					_line_tmp2 = bold_spec_name(_line_tmp)
-					out_file.writelines(_line_tmp2)
+					get_header(_line)
+					# _line_tmp = coloring_bigger_header(_line)
+					# _line_tmp2 = bold_spec_name(_line_tmp)
+					out_file.writelines(_line)
 					continue_upper = 1
 					break
 			if havelink in _line:
-				_line_tmp = link_handle(_line)
-				_line_tmp2 = bold_spec_name(_line_tmp)
-				out_file.writelines(_line_tmp2)
+				# _line_tmp = link_handle(_line)
+				# _line_tmp2 = bold_spec_name(_line_tmp)
+				out_file.writelines(_line)
 				continue_upper = 1
 			if continue_upper == 1:
 				continue_upper = 0
@@ -247,10 +278,15 @@ if __name__ == "__main__":
 			if PATTERN_TO_GET_IMG_LINE in _line:
 				continue
 			if replace_pattern in _line:
-				out_file.writelines(IMG_TXT_INFO[write_idx])
+				out_file.writelines(image_process(IMG_TXT_INFO[write_idx]))
 				write_idx += 1
 			else:
 				CURR_LINE += 1
-				_line_tmp2 = bold_spec_name(_line)
-				out_file.writelines(_line_tmp2)
+				# _line_tmp2 = bold_spec_name(_line)
+				if line_CINK == _line:
+					out_file.writelines(_line.replace("DR CINK", "<a href=\"https://drcink.com.vn/\"><span style=\"color: #ed1c24;\"><strong>DR CINK</strong></span></a>"))
+				else:
+					out_file.writelines(_line)
+		if write_idx != len(IMG_CMT_INFO):
+			print("Errrrrrrrrrrrr")
 	print(sys.argv)

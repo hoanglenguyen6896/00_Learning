@@ -146,8 +146,8 @@ class all_image_stuff:
                     'thumbnail': None
                 }
             except:
-                print("Something wrong with exif!!!")
-                exit(-1)
+                print(f"Something wrong with exif of {in_file}")
+                return
             # Dunp human readable exif to image exif
             exif_bytes = piexif.dump(self._set_img_des_from_exif(
                                         _dir_name,
@@ -205,7 +205,7 @@ class all_image_stuff:
                 elif rgb_img.width > 150:
                     rgb_img.thumbnail((150, 150))
                 # rgb_img.putalpha(180)
-        return rgb_img
+        return logo_file
 
     # Resize all images in all subdirectories of input directory
     def _resize_all(self):
@@ -217,6 +217,8 @@ class all_image_stuff:
                                         input_full_path,
                                         output_full_path,
                                         logo_image)
+        if logo_image != None:
+            logo_image.close()
 
 if __name__ == '__main__':
     def argparse_init():
@@ -244,6 +246,43 @@ if __name__ == '__main__':
         return parser.parse_args()
 
     argv = argparse_init()
+
+    if argv.author == None:
+        uin_put = input("Add author or not (Y/N)?\n>> ")
+        if uin_put.lower() in ["y", "yes"]:
+            argv.author = input("Add author to be use:\n>> ")
+
+    if argv.add_logo == None:
+        uin_put = input("Add logo or not (Y/N)?\n>> ")
+        if uin_put.lower() in ["y", "yes"]:
+            logo_file_list = os.listdir(LOGO_PATH)
+            logo_list = [x.split(".")[0] for x in logo_file_list]
+            argv.add_logo = input(f"Add logo to be use ({logo_list})\n>> ")
+
+    confirm = "N"
+    while True:
+        print("Are these correct?")
+        if argv.author == None:
+            print("\tNo author and copyright to be set")
+        else:
+            print("\tAuthor and copyright will be set to:", argv.author)
+
+        if argv.add_logo == None:
+            print("\tNo logo to be set")
+        else:
+            print("\tLogo", argv.add_logo, "will be use")
+        confirm = input("(Y/N)?\n>> ")
+        if confirm.lower() in ["y", "yes"]:
+            break
+        uin_put = input("Add author or not (Y/N)?\n>> ")
+        if uin_put.lower() in ["y", "yes"]:
+            argv.author = input("Add author to be use:\n>> ")
+
+        uin_put = input("Add logo or not (Y/N)?\n>> ")
+        if uin_put.lower() in ["y", "yes"]:
+            logo_file_list = os.listdir(LOGO_PATH)
+            logo_list = [x.split(".")[0] for x in logo_file_list]
+            argv.add_logo = input(f"Add logo to be use ({logo_list})\n>> ")
 
     tmp = all_image_stuff(
         argv.input,

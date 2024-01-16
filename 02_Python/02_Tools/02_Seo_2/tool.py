@@ -238,15 +238,15 @@ if __name__ == "__main__":
 		for _line in file_content:
 			for hrdcheck in hdr_pattern:
 				if hrdcheck in _line:
-					_line_tmp = coloring_bigger_header(_line)
-					_line_tmp2 = bold_spec_name(_line_tmp)
-					out_file.writelines(_line_tmp2)
+					# _line_tmp = coloring_bigger_header(_line)
+					# _line_tmp2 = bold_spec_name(_line_tmp)
+					out_file.writelines(_line)
 					continue_upper = 1
 					break
 			if havelink in _line:
 				_line_tmp = link_handle(_line)
-				_line_tmp2 = bold_spec_name(_line_tmp)
-				out_file.writelines(_line_tmp2)
+				# _line_tmp2 = bold_spec_name(_line_tmp)
+				out_file.writelines(_line)
 				continue_upper = 1
 			if continue_upper == 1:
 				continue_upper = 0
@@ -259,9 +259,9 @@ if __name__ == "__main__":
 				write_idx += 1
 			else:
 				CURR_LINE += 1
-				_line_tmp2 = bold_spec_name(_line)
-				__line_tmp3 = _line_tmp2.replace(PRIMARY_KEY, f"<strong>{PRIMARY_KEY}</strong>")
-				out_file.writelines(__line_tmp3)
+				# _line_tmp2 = bold_spec_name(_line)
+				# __line_tmp3 = _line_tmp2.replace(PRIMARY_KEY, f"<strong>{PRIMARY_KEY}</strong>")
+				out_file.writelines(_line)
 	if (write_idx != len(IMG_TXT_INFO)):
 		print("aschilllll;llvhoasdhvo;ahdvoaishdv;oahsdv;uahsd;vuha;odv")
 	print(sys.argv)
