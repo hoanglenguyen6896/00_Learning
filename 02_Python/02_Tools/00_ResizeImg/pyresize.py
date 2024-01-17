@@ -182,11 +182,14 @@ class all_image_stuff:
     def _resize_logo(self):
         logo_file = None
         if self.add_logo != None:
-            logo_file_list = os.listdir(LOGO_PATH)
-            for _img_file in logo_file_list:
-                if self.add_logo in _img_file:
-                    self.logo_file = LOGO_PATH + _img_file
-                    break
+            if os.path.isfile(self.add_logo):
+                self.logo_file = self.add_logo
+            else:
+                logo_file_list = os.listdir(LOGO_PATH)
+                for _img_file in logo_file_list:
+                    if self.add_logo in _img_file:
+                        self.logo_file = LOGO_PATH + _img_file
+                        break
             if self.logo_file == None:
                 print("Can't find logo of", self.add_logo)
             else:
