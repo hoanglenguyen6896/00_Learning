@@ -22,9 +22,9 @@ IMG_EXIF_DES = {
 
 SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 
-IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR/"
-OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR/"
-LOGO_PATH = SCRIPT_ABS_PATH + "/logo/"
+IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR"
+OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR"
+LOGO_PATH = SCRIPT_ABS_PATH + "/logo"
 class all_image_stuff:
     def __init__(self,
                  input_dir = IN_IMG_DIR,
@@ -37,7 +37,7 @@ class all_image_stuff:
         self.indir = input_dir
         # Check if input directory exists
         if not (os.path.isdir(self.indir)):
-            print("Image unput directory does not exist!")
+            print("Image input directory does not exist!")
             exit(-1)
         self.outdir = output_dir
         # Check if output directory exists then create it
@@ -50,20 +50,20 @@ class all_image_stuff:
             for _dir in os.listdir(self.outdir):
                 # print(_dir)
                 try:
-                    shutil.rmtree(self.outdir + _dir)
+                    shutil.rmtree(self.outdir + "/" + _dir)
                 except NotADirectoryError as __tmp:
-                    print("Skip", _dir)
+                    print("Skip", _dir, __tmp)
                 except Exception as _tmp:
                     print("Something wrong when clean", self.outdir, _tmp)
         self.all_dir = []
         # list all dir in input directory
         _tmp_all_dir = os.listdir(self.indir)
-        for _dir in _tmp_all_dir:
-            if (os.path.isdir(self.indir + _dir)):
+        for _obj in _tmp_all_dir:
+            if (os.path.isdir(self.indir + "/" + _obj)):
                 # Get subdir only then create corresponding output subdir
-                self.all_dir.append(_dir)
-                if not os.path.isdir(self.outdir + _dir):
-                    os.mkdir(self.outdir + _dir)
+                self.all_dir.append(_obj)
+                if not os.path.isdir(self.outdir + "/" + _obj):
+                    os.mkdir(self.outdir + "/" + _obj)
                 else:
                     print("Output directory should be empty!!!")
                     exit(-1)
@@ -71,7 +71,7 @@ class all_image_stuff:
             else:
                 pass
         if len(self.all_dir) == 0:
-            print("Input dir is empty!!!")
+            print(f"Input {self.indir} dir is empty!!!")
             exit(-1)
         pass
 
@@ -172,7 +172,7 @@ class all_image_stuff:
             _out = output_full_path + "/" \
                                 + unidecode(
                                     _dir_name.replace(" ", "-").lower()) \
-                                + " (" + _img.split(".")[0] + ")." \
+                                + "-" + _img.split(".")[0] + "." \
                                 + _img.split(".")[1]
             self._resize_img_sub(_dir_name,
                                     _in,
@@ -214,8 +214,8 @@ class all_image_stuff:
     def _resize_all(self):
         logo_image = self._resize_logo()
         for _dir_name in self.all_dir:
-            input_full_path = self.indir + _dir_name
-            output_full_path = self.outdir + _dir_name
+            input_full_path = self.indir + "/" + _dir_name
+            output_full_path = self.outdir + "/" + _dir_name
             self._resize_img_in_a_dir(_dir_name,
                                         input_full_path,
                                         output_full_path,
