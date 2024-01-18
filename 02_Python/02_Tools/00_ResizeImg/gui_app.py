@@ -135,7 +135,7 @@ logo_check_button.place(x=_col(0), y=_row(8))
 
 logo_entry = tkinter.Entry(resize_app, width=50)
 logo_entry.place(x=_col(8), y=_row(8.2))
-logo_entry.insert(0, pyresize.LOGO_PATH + "yody.png")
+logo_entry.insert(0, pyresize.LOGO_PATH + "/yody.png")
 logo_entry.xview_moveto(fraction=1)
 if logo_check_var.get() == 1:
     logo_entry.config(state="normal")
@@ -164,7 +164,7 @@ def image_process_button_action():
     if logo_check_var.get() == 1:
         _logo = logo_entry.get()
         if not os.path.isfile(_logo):
-            messagebox.showerror("Error", "Invalid logo path")
+            messagebox.showerror("Error", (_logo, "does not exist or is not a file"))
     else:
         _logo == None
 
@@ -177,9 +177,9 @@ def image_process_button_action():
             _author,
             _logo
         )
-        messagebox.showinfo("Info", f"{type(tmp)}")
-        tmp._resize_all()
-        messagebox.showinfo("Info", "Done")
+        err = tmp.resize_all_image_in_input_subdirs()
+        if err == 0:
+            messagebox.showinfo("Info", "Done")
 
 
 image_process_button = tkinter.Button(text="EXECUTE", command=image_process_button_action)

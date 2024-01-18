@@ -5,6 +5,7 @@ import os
 from unidecode import unidecode
 import shutil
 import argparse
+from tkinter import messagebox
 
 TARGET_WIDTH = 750
 
@@ -25,21 +26,31 @@ SCRIPT_ABS_PATH = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 IN_IMG_DIR = SCRIPT_ABS_PATH + "/IN_DIR"
 OUT_IMG_DIR = SCRIPT_ABS_PATH + "/OUT_DIR"
 LOGO_PATH = SCRIPT_ABS_PATH + "/logo"
+ERR = 0
 class all_image_stuff:
     def __init__(self,
                  input_dir = IN_IMG_DIR,
                  output_dir = OUT_IMG_DIR,
                  author = None,
                  add_logo = None):
+        global ERR
+        ERR = 0
         self.author = author
         self.add_logo = add_logo
         self.logo_file = None
-        self.indir = input_dir
+        if input_dir[-1] == "/":
+            self.indir = input_dir
+        else:
+            self.indir = input_dir + "/"
         # Check if input directory exists
         if not (os.path.isdir(self.indir)):
-            print("Image input directory does not exist!")
-            exit(-1)
-        self.outdir = output_dir
+            messagebox.showerror("Error", f"{self.indir} does not exist")
+            ERR = 1
+            return None
+        if output_dir[-1] == "/":
+            self.outdir = output_dir
+        else:
+            self.outdir = output_dir + "/"
         # Check if output directory exists then create it
         if not (os.path.isdir(self.outdir)):
             print("Creating output directory " + self.outdir)
@@ -50,29 +61,34 @@ class all_image_stuff:
             for _dir in os.listdir(self.outdir):
                 # print(_dir)
                 try:
-                    shutil.rmtree(self.outdir + "/" + _dir)
+                    shutil.rmtree(self.outdir + _dir)
                 except NotADirectoryError as __tmp:
                     print("Skip", _dir, __tmp)
                 except Exception as _tmp:
-                    print("Something wrong when clean", self.outdir, _tmp)
+                    messagebox.showerror("Error", f"Something wrong when clean {self.outdir} - {_tmp}")
+                    ERR = 1
+                    return None
+                    # print("Something wrong when clean", self.outdir, _tmp)
         self.all_dir = []
         # list all dir in input directory
         _tmp_all_dir = os.listdir(self.indir)
         for _obj in _tmp_all_dir:
-            if (os.path.isdir(self.indir + "/" + _obj)):
+            if (os.path.isdir(self.indir + _obj)):
                 # Get subdir only then create corresponding output subdir
                 self.all_dir.append(_obj)
-                if not os.path.isdir(self.outdir + "/" + _obj):
-                    os.mkdir(self.outdir + "/" + _obj)
+                if not os.path.isdir(self.outdir + _obj):
+                    os.mkdir(self.outdir + _obj)
                 else:
-                    print("Output directory should be empty!!!")
-                    exit(-1)
+                    messagebox.showerror("Error", "Output directory should be empty!!!")
+                    ERR = 1
+                    return None
                 pass
             else:
                 pass
         if len(self.all_dir) == 0:
-            print(f"Input {self.indir} dir is empty!!!")
-            exit(-1)
+            messagebox.showerror("Error", f"Input {self.indir} dir is empty!!!")
+            ERR = 1
+            return None
         pass
 
     def _convert_utf16_to_hex_exif(self, target_str):
@@ -117,8 +133,9 @@ class all_image_stuff:
         return exifdata
 
     # Resize a single image
-    def _resize_img_sub(self, _dir_name, in_file, out_file, logo_image):
+    def resize_a_single_image(self, _dir_name, in_file, out_file, logo_image):
         # print(in_file, out_file)
+        global ERR
         with Image.open(in_file) as image:
             if image.mode != "RGB":
                 rgb_img = image.convert("RGB")
@@ -146,7 +163,7 @@ class all_image_stuff:
                     'thumbnail': None
                 }
             except:
-                print(f"Something wrong with exif of {in_file}")
+                messagebox.showwarning("Warning", f"Something wrong with exif of {in_file}, it will be skipped")
                 return
             # Dunp human readable exif to image exif
             exif_bytes = piexif.dump(self._set_img_des_from_exif(
@@ -163,7 +180,7 @@ class all_image_stuff:
             rgb_img.save(out_file, exif=exif_bytes)
 
     # Resize all images in a single directory
-    def _resize_img_in_a_dir(self, _dir_name,
+    def resize_all_image_in_a_dir(self, _dir_name,
                                 input_full_path,
                                 output_full_path,
                                 logo_image):
@@ -174,12 +191,12 @@ class all_image_stuff:
                                     _dir_name.replace(" ", "-").lower()) \
                                 + "-" + _img.split(".")[0] + "." \
                                 + _img.split(".")[1]
-            self._resize_img_sub(_dir_name,
+            self.resize_a_single_image(_dir_name,
                                     _in,
                                     _out,
                                     logo_image)
 
-    def _resize_logo(self):
+    def resize_target_logo(self):
         logo_file = None
         if self.add_logo != None:
             if os.path.isfile(self.add_logo):
@@ -188,7 +205,7 @@ class all_image_stuff:
                 logo_file_list = os.listdir(LOGO_PATH)
                 for _img_file in logo_file_list:
                     if self.add_logo in _img_file:
-                        self.logo_file = LOGO_PATH + _img_file
+                        self.logo_file = LOGO_PATH + "/" + _img_file
                         break
             if self.logo_file == None:
                 print("Can't find logo of", self.add_logo)
@@ -211,17 +228,20 @@ class all_image_stuff:
         return logo_file
 
     # Resize all images in all subdirectories of input directory
-    def _resize_all(self):
-        logo_image = self._resize_logo()
+    def resize_all_image_in_input_subdirs(self):
+        if ERR == 1:
+            return ERR
+        logo_image = self.resize_target_logo()
         for _dir_name in self.all_dir:
-            input_full_path = self.indir + "/" + _dir_name
-            output_full_path = self.outdir + "/" + _dir_name
-            self._resize_img_in_a_dir(_dir_name,
+            input_full_path = self.indir + _dir_name
+            output_full_path = self.outdir + _dir_name
+            self.resize_all_image_in_a_dir(_dir_name,
                                         input_full_path,
                                         output_full_path,
                                         logo_image)
         if logo_image != None:
             logo_image.close()
+        return ERR
 
 if __name__ == '__main__':
     def argparse_init():
@@ -293,4 +313,4 @@ if __name__ == '__main__':
         argv.author,
         argv.add_logo
     )
-    tmp._resize_all()
+    tmp.resize_all_image_in_input_subdirs()
