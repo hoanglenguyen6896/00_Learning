@@ -177,6 +177,7 @@ def image_process_button_action():
             _author,
             _logo
         )
+        messagebox.showinfo("Info", f"{type(tmp)}")
         tmp._resize_all()
         messagebox.showinfo("Info", "Done")
 
