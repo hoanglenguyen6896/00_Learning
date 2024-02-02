@@ -135,12 +135,23 @@ class all_image_stuff:
     # Resize a single image
     def resize_a_single_image(self, _dir_name, in_file, out_file, logo_image):
         # print(in_file, out_file)
+        # print(imghdr.what(in_file))
+        # return
         global ERR
+
+        if out_file.endswith("jpg") != True:
+            for img_type in ["jpg", "png", "webp", "jpeg", \
+                                "bpm", "nef", "tif", "tiff"]:
+                if out_file.endswith(img_type) == True:
+                    out_file = out_file[:-len(img_type)] + "jpg"
+                    break
+        # print(out_file)
+        # return
         with Image.open(in_file) as image:
             if image.mode != "RGB":
                 rgb_img = image.convert("RGB")
             else:
-                rgb_img = image
+                rgb_img = image.convert("RGB")
             # Enlarge
             if rgb_img.width < TARGET_WIDTH:
                 _ratio = TARGET_WIDTH/rgb_img.width
@@ -165,19 +176,26 @@ class all_image_stuff:
             except:
                 messagebox.showwarning("Warning", f"Something wrong with exif of {in_file}, it will be skipped")
                 return
-            # Dunp human readable exif to image exif
-            exif_bytes = piexif.dump(self._set_img_des_from_exif(
-                                        _dir_name,
-                                        self.author,
-                                        exifdata))
-            # print(exif_bytes)
-            # Save image with dumped exif
-            if logo_image != None:
-                rgb_img.paste(logo_image,
-                                (rgb_img.width - logo_image.width,
-                                    rgb_img.height - logo_image.height),
-                                logo_image)
-            rgb_img.save(out_file, exif=exif_bytes)
+            exifdata['Interop'] = {}
+            exifdata['1st'] = {}
+            exifdata['thumbnail'] = None
+            try:
+                # Dunp human readable exif to image exif
+                exif_bytes = piexif.dump(self._set_img_des_from_exif(
+                                            _dir_name,
+                                            self.author,
+                                            exifdata))
+                # print(exif_bytes)
+                # Save image with dumped exif
+                if logo_image != None:
+                    rgb_img.paste(logo_image,
+                                    (rgb_img.width - logo_image.width,
+                                        rgb_img.height - logo_image.height),
+                                    logo_image)
+                rgb_img.save(out_file, exif=exif_bytes)
+            except Exception as e:
+                print(in_file, "Error", e)
+                messagebox.showerror("Error", f"Can't convert image {in_file}")
 
     # Resize all images in a single directory
     def resize_all_image_in_a_dir(self, _dir_name,

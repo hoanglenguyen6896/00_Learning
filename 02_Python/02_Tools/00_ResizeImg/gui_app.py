@@ -27,7 +27,7 @@ resize_app.resizable(True, True)
 resize_app.bind('<Escape>', lambda e, w=resize_app: w.destroy())
 esc_lable = tkinter.Label(resize_app,
                             text="Press Escape key on keyboard to close this window.",
-                            font=font.Font(size=12)).place(x=0, y=_row(0))
+                            font=font.Font(size=12)).place(x=_col(8), y=_row(0))
 
 # Input path
 input_lable = tkinter.Label(resize_app, text="Input:", font=font.Font(size=12))
@@ -185,5 +185,12 @@ def image_process_button_action():
 image_process_button = tkinter.Button(text="EXECUTE", command=image_process_button_action)
 image_process_button.config(height=5, width=75)
 image_process_button.place(x=0, y=200)
+
+# Reload button
+def reload_button_action():
+    print("To be implemented")
+    pass
+reload_button = tkinter.Button(text="RELOAD", command=reload_button_action)
+reload_button.place(x=0, y=0)
 
 resize_app.mainloop()
