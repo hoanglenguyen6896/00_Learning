@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"4digit7segmentcathode\startup_stm32f103xb.o"
+"4digit7segmentcathode\main.o"
+"4digit7segmentcathode\stm32f1xx_it.o"
+"4digit7segmentcathode\stm32f1xx_hal_msp.o"
+"4digit7segmentcathode\stm32f1xx_hal_gpio_ex.o"
+"4digit7segmentcathode\stm32f1xx_hal_tim.o"
+"4digit7segmentcathode\stm32f1xx_hal_tim_ex.o"
+"4digit7segmentcathode\stm32f1xx_hal.o"
+"4digit7segmentcathode\stm32f1xx_hal_rcc.o"
+"4digit7segmentcathode\stm32f1xx_hal_rcc_ex.o"
+"4digit7segmentcathode\stm32f1xx_hal_gpio.o"
+"4digit7segmentcathode\stm32f1xx_hal_dma.o"
+"4digit7segmentcathode\stm32f1xx_hal_cortex.o"
+"4digit7segmentcathode\stm32f1xx_hal_pwr.o"
+"4digit7segmentcathode\stm32f1xx_hal_flash.o"
+"4digit7segmentcathode\stm32f1xx_hal_flash_ex.o"
+"4digit7segmentcathode\stm32f1xx_hal_exti.o"
+"4digit7segmentcathode\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "4digit7segmentCathode\4digit7segmentCathode.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "4digit7segmentCathode.map" -o 4digit7segmentCathode\4digit7segmentCathode.axf

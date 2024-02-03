@@ -1,0 +1,5 @@
+GPIO.pbi: \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\src\GPIO.c \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\inc\GPIO.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\board\inc\MKL46Z256VLL4.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\board\inc/REG_ADDR.h

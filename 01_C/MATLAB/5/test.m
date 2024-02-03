@@ -1,0 +1,1 @@
+col = randperm(10);

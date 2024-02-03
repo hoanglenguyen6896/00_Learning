@@ -1,0 +1,244 @@
+###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  16/Jan/2021  22:27:55
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Exe\LedBlinking.out
+#    Map file     =
+#        F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\List\LedBlinking.map
+#    Command line =
+#        -f C:\Users\H\AppData\Local\Temp\EWED87.tmp
+#        ("F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Obj\INIT.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Obj\LED.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Obj\main.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Obj\startup_MKL46Z4.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Obj\system_MKL46Z4.o" --no_out_extension -o
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\Exe\LedBlinking.out" --map
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\Debug\List\LedBlinking.map" --config
+#        "F:\Libraries\Documents\IAR\_Assignment 1 -
+#        Copy\project\..\MKL46Z\MKL46Z256xxx4_flash.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0xa000 { ro section .intvec };
+"P1":  place in [from 0xa400 to 0xa40f] { section FlashConfig };
+"P2":  place in [from 0xa000 to 0xa1ff] |
+                [from 0xa410 to 0x3'ffff] { ro };
+define block RW { rw };
+"P3":  place in [from 0x1fff'e000 to 0x2000'5bff] { block RW };
+define block ZI { zi };
+"P4":  place in [from 0x1fff'e000 to 0x2000'5bff] { block ZI };
+define block CSTACK with size = 1K, alignment = 8 { };
+"P6":  place in [from 0x2000'5c00 to 0x2000'5fff] { block CSTACK };
+
+No sections matched the following patterns:
+
+  section m_interrupts_ram  in "P7"
+
+
+  Section          Kind         Address   Size  Object
+  -------          ----         -------   ----  ------
+"A0":                                     0xc0
+  .intvec          ro code       0xa000   0xc0  startup_MKL46Z4.o [1]
+                               - 0xa0c0   0xc0
+
+"P2", part 1 of 2:                        0xcc
+  .text            ro code       0xa0c0   0x66  main.o [1]
+  .text            ro code       0xa126   0x3c  zero_init3.o [3]
+  .text            ro code       0xa162    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xa164   0x28  data_init.o [3]
+                               - 0xa18c   0xcc
+
+"P1":                                     0x10
+  FlashConfig      ro code       0xa400   0x10  startup_MKL46Z4.o [1]
+                               - 0xa410   0x10
+
+"P2", part 2 of 2:                       0x114
+  .text            ro code       0xa410   0x24  startup_MKL46Z4.o [1]
+  .iar.init_table  const         0xa434   0x10  - Linker created -
+  .text            ro code       0xa444   0x1e  cmain.o [3]
+  .text            ro code       0xa462    0x4  low_level_init.o [2]
+  .text            ro code       0xa466    0x8  exit.o [2]
+  .text            ro code       0xa46e    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xa470    0xa  cexit.o [3]
+  .text            ro code       0xa47a    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xa47c   0x14  exit.o [4]
+  .text            ro code       0xa490   0x1c  cstartup_M.o [3]
+  .text            ro code       0xa4ac    0xc  system_MKL46Z4.o [1]
+  .text            ro code       0xa4b8    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4c0    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4c8    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4d0    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4d8    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4e0    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4e8    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4f0    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa4f8    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa500    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa508    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa510    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa518    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xa520    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xa522    0x2  startup_MKL46Z4.o [1]
+  .rodata          const         0xa524    0x0  zero_init3.o [3]
+                               - 0xa524  0x114
+
+"P3-P4":                                   0x4
+  ZI                        0x1fff'e000    0x4  <Block>
+    .bss           zero     0x1fff'e000    0x4  main.o [1]
+                          - 0x1fff'e004    0x4
+
+"P6":                                    0x400
+  CSTACK                    0x2000'5c00  0x400  <Block>
+    CSTACK         uninit   0x2000'5c00  0x400  <Block tail>
+                          - 0x2000'6000  0x400
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+       0xa18c       0xa1ff      0x74
+       0xa524     0x3'ffff  0x3'5adc
+  0x1fff'e004  0x2000'5bff    0x7bfc
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x4:
+          0x1fff'e000   0x4
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module             ro code  ro data  rw data
+    ------             -------  -------  -------
+command line/config:
+    --------------------------------------------
+    Total:
+
+F:\Libraries\Documents\IAR\Assignment_1_1\project\Debug\Obj: [1]
+    main.o                 102                 4
+    startup_MKL46Z4.o      358
+    system_MKL46Z4.o        12
+    --------------------------------------------
+    Total:                 472                 4
+
+dl6M_tln.a: [2]
+    exit.o                   8
+    low_level_init.o         4
+    --------------------------------------------
+    Total:                  12
+
+rt6M_tl.a: [3]
+    cexit.o                 10
+    cmain.o                 30
+    cstartup_M.o            28
+    data_init.o             40
+    zero_init3.o            60
+    --------------------------------------------
+    Total:                 168
+
+shb_l.a: [4]
+    exit.o                  20
+    --------------------------------------------
+    Total:                  20
+
+    Linker created                   16    1'024
+------------------------------------------------
+    Grand Total:           672       16    1'028
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address  Size  Type      Object
+-----                       -------  ----  ----      ------
+.iar.init_table$$Base        0xa434         --   Gb  - Linker created -
+.iar.init_table$$Limit       0xa444         --   Gb  - Linker created -
+?main                        0xa445        Code  Gb  cmain.o [3]
+CSTACK$$Base            0x2000'5c00         --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'6000         --   Gb  - Linker created -
+Region$$Table$$Base          0xa434         --   Gb  - Linker created -
+Region$$Table$$Limit         0xa444         --   Gb  - Linker created -
+SystemInit                   0xa4ad   0x8  Code  Gb  system_MKL46Z4.o [1]
+ZI$$Base                0x1fff'e000         --   Gb  - Linker created -
+ZI$$Limit               0x1fff'e004         --   Gb  - Linker created -
+__RAM_VECTOR_TABLE_SIZE {Abs}
+                                0x0        Data  Gb  <internal module>
+__VECTOR_RAM {Abs}           0xa000        Data  Gb  <internal module>
+__VECTOR_TABLE {Abs}         0xa000        Data  Gb  <internal module>
+__Vectors                    0xa000         --   Gb  startup_MKL46Z4.o [1]
+__Vectors_End                0xa0c0        Data  Gb  startup_MKL46Z4.o [1]
+__Vectors_Size {Abs}           0xc0         --   Gb  startup_MKL46Z4.o [1]
+__cmain                      0xa445        Code  Gb  cmain.o [3]
+__exit                       0xa47d  0x14  Code  Gb  exit.o [4]
+__iar_data_init3             0xa165  0x28  Code  Gb  data_init.o [3]
+__iar_program_start          0xa491        Code  Gb  cstartup_M.o [3]
+__iar_zero_init3             0xa127  0x3c  Code  Gb  zero_init3.o [3]
+__low_level_init             0xa463   0x4  Code  Gb  low_level_init.o [2]
+__vector_table               0xa000        Data  Gb  startup_MKL46Z4.o [1]
+__vector_table_0x1c          0xa01c        Data  Gb  startup_MKL46Z4.o [1]
+_call_main                   0xa451        Code  Gb  cmain.o [3]
+_exit                        0xa471        Code  Gb  cexit.o [3]
+_main                        0xa45b        Code  Gb  cmain.o [3]
+add                          0xa0d5   0x4  Code  Gb  main.o [1]
+address                      0xa0d9   0x8  Code  Gb  main.o [1]
+checker                      0xa0c1   0xe  Code  Gb  main.o [1]
+exit                         0xa467   0x8  Code  Gb  exit.o [2]
+kcs                     0x1fff'e000   0x4  Data  Gb  main.o [1]
+main                         0xa0e1  0x46  Code  Gb  main.o [1]
+
+
+[1] = F:\Libraries\Documents\IAR\Assignment_1_1\project\Debug\Obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+    672 bytes of readonly  code memory
+     16 bytes of readonly  data memory
+  1'028 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
