@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>4</fileVersion>
+    <fileChecksum>2092127889</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+            <file>$PROJ_DIR$\Application\src\Flash.c</file>
+            <file>$PROJ_DIR$\board\inc\MKL46Z256VLL4.h</file>
+            <file>$PROJ_DIR$\board\linker\MKL46Z256xxx4.icf</file>
+            <file>$PROJ_DIR$\Debug\Obj\system_MKL46Z4.o</file>
+            <file>$PROJ_DIR$\Application\inc\UART0.h</file>
+            <file>$PROJ_DIR$\Application\inc\QUEUE.h</file>
+            <file>$PROJ_DIR$\Application\src\SREC.c</file>
+            <file>$PROJ_DIR$\board\startup\fsl_device_registers.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\SREC.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\Flash.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\startup_MKL46Z4.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+            <file>$PROJ_DIR$\Application\src\QUEUE.c</file>
+            <file>$PROJ_DIR$\board\inc\REG_ADDR.h</file>
+            <file>$PROJ_DIR$\board\startup\system_MKL46Z4.c</file>
+            <file>$PROJ_DIR$\board\startup\startup_MKL46Z4.s</file>
+            <file>$PROJ_DIR$\Application\src\UART0.c</file>
+            <file>$PROJ_DIR$\board\startup\system_MKL46Z4.h</file>
+            <file>$PROJ_DIR$\Application\main.c</file>
+            <file>$PROJ_DIR$\Application\inc\SREC.h</file>
+            <file>$PROJ_DIR$\Application\inc\Flash.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\MockII.pbd</file>
+            <file>$PROJ_DIR$\Application\inc\GPIO.h</file>
+            <file>$PROJ_DIR$\Application\src\GPIO.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\QUEUE.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Exe\MockII.srec</file>
+            <file>$PROJ_DIR$\board\startup\MKL46Z4.h</file>
+            <file>$PROJ_DIR$\board\CMSIS\Include\core_cm0plus.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\GPIO.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\List\MockII.map</file>
+            <file>$PROJ_DIR$\Debug\Obj\SREC.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\c\iccarm_builtin.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\SREC.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\system_MKL46Z4.__cstat.et</file>
+            <file>$PROJ_DIR$\board\CMSIS\Include\core_cmInstr.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\UART0.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+            <file>$TOOLKIT_DIR$\lib\dl6M_tln.a</file>
+            <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\UART0.xcl</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\QUEUE.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\Flash.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\QUEUE.o</file>
+            <file>$PROJ_DIR$\Debug\Exe\MockII.out</file>
+            <file>$PROJ_DIR$\board\startup\MKL46Z4_features.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\system_MKL46Z4.xcl</file>
+            <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
+            <file>$PROJ_DIR$\board\CMSIS\Include\core_cmFunc.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\UART0.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\Flash.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\GPIO.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\GPIO.xcl</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 52 31</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\src\Flash.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 50</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 10</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 58</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 22 2 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\src\SREC.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 35</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 9</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 32</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 21 2 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\src\QUEUE.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 51</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 48</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 26</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 6 2 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\board\startup\system_MKL46Z4.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 4</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 54</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 36</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 45 41 40 47 12 44 8 28 29 37 39 34 56 19 53</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\board\startup\startup_MKL46Z4.s</name>
+            <outputs>
+                <tool>
+                    <name>AARM</name>
+                    <file> 11</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\src\UART0.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 38</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 46</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 57</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 5 6 2 15 24</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 13</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 49</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 33</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 5 6 2 15 24 21 22</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Application\src\GPIO.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 59</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 60</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 30</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 24 2 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\MockII.out</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 31</file>
+                </tool>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 27</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 3 50 59 13 51 35 11 4 38 0 43 55 42</file>
+                </tool>
+            </inputs>
+        </file>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>

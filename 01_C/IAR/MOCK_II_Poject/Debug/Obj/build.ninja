@@ -1,0 +1,36 @@
+#Generating source browse information for project MockII
+
+
+#Abbreviations
+cc = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\SourceIndexer.exe
+ll = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\PbdLink.exe
+bd = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build Flash.pbi : index Flash.xcl
+build GPIO.pbi : index GPIO.xcl
+build QUEUE.pbi : index QUEUE.xcl
+build SREC.pbi : index SREC.xcl
+build UART0.pbi : index UART0.xcl
+build main.pbi : index main.xcl
+build system_MKL46Z4.pbi : index system_MKL46Z4.xcl
+build MockII_part0.pbi : link Flash.pbi GPIO.pbi QUEUE.pbi
+build MockII_part1.pbi : link SREC.pbi UART0.pbi main.pbi
+build MockII_part2.pbi : link system_MKL46Z4.pbi
+build MockII.pbd : link MockII_part0.pbi MockII_part1.pbi MockII_part2.pbi
+build MockII.pbw : browsedata MockII.pbd
+
+

@@ -1,0 +1,6 @@
+LED.pbi: \
+  F:\Libraries\Documents\IAR\_Assignment\ 3\board\inc\REG_ADDR.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 3\board\inc\MKL46Z256VLL4.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 3\Application\inc\HAL.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 3\Application\inc\LED.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 3\Application\src\LED.c

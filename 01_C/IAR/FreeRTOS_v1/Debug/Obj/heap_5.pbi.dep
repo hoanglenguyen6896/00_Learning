@@ -1,0 +1,21 @@
+heap_5.pbi: \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\portable\src\heap_5.c \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdlib.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Defaults.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ysizet.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product_stdlib.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc\FreeRTOS.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stddef.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdint.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\config\FreeRTOSConfig.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc/projdefs.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc/portable.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc/deprecated_definitions.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\portable\inc\portmacro.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc/mpu_wrappers.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc\task.h \
+  C:\Users\Administrator\Desktop\\FreeRTOS_v1\FreeRTOS\inc/list.h

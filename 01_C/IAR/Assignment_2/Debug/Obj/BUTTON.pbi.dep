@@ -1,0 +1,7 @@
+BUTTON.pbi: \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\Application\src\BUTTON.c \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\Application\inc\BUTTON.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\Application\inc/LED.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\Application\inc/HAL.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\board\inc\MKL46Z256VLL4.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 2\board\inc/REG_ADDR.h
