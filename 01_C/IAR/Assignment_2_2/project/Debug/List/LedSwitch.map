@@ -1,0 +1,170 @@
+###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  18/Dec/2020  08:51:26
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        2_v1\project\Debug\Exe\LedSwitch.out
+#    Map file     =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        2_v1\project\Debug\List\LedSwitch.map
+#    Command line =
+#        -f C:\Users\H\AppData\Local\Temp\EWA59E.tmp
+#        ("F:\Libraries\Documents\IAR\_Assignment
+#        2_v1\project\Debug\Obj\main.o" --no_out_extension -o
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        2_v1\project\Debug\Exe\LedSwitch.out" --map
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        2_v1\project\Debug\List\LedSwitch.map" --config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.4\arm\config\linker\NXP\MKL46Z256xxx4.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x0 to 0x3ff] |
+                [from 0x410 to 0x3'ffff] { ro };
+define block CSTACK with size = 2K, alignment = 8 { };
+define block HEAP with size = 4K, alignment = 8 { };
+"P3":  place in [from 0x1fff'e000 to 0x1fff'ffff] |
+                [from 0x2000'0000 to 0x2000'5fff] {
+          rw, block CSTACK, block HEAP };
+
+No sections matched the following patterns:
+
+  ro section application_specific_ro  in "P2|P4"
+  rw                                  in "P3"
+  rw section application_specific_rw  in "P2|P4"
+  section FlashConfig                 in "P5"
+
+
+  Section   Kind         Address   Size  Object
+  -------   ----         -------   ----  ------
+"A0":                              0x40
+  .intvec   ro code          0x0   0x40  vector_table_M.o [3]
+                          - 0x40   0x40
+
+"P1":                              0x6c
+  .text     ro code         0x40   0x1e  cmain.o [3]
+  .text     ro code         0x5e    0x4  low_level_init.o [2]
+  .text     ro code         0x62    0x4  main.o [1]
+  .text     ro code         0x66    0x8  exit.o [2]
+  .text     ro code         0x6e    0x2  vector_table_M.o [3]
+  .text     ro code         0x70    0xa  cexit.o [3]
+  .text     ro code         0x7c   0x14  exit.o [4]
+  .text     ro code         0x90   0x1c  cstartup_M.o [3]
+                          - 0xac   0x6c
+
+"P3":                             0x800
+  CSTACK             0x1fff'e000  0x800  <Block>
+    CSTACK  uninit   0x1fff'e000  0x800  <Block tail>
+                   - 0x1fff'e800  0x800
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+         0xac        0x3ff     0x354
+        0x410     0x3'ffff  0x3'fbf0
+  0x1fff'e800  0x1fff'ffff    0x1800
+  0x2000'0000  0x2000'5fff    0x6000
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module            ro code  rw data
+    ------            -------  -------
+command line/config:
+    ----------------------------------
+    Total:
+
+F:\Libraries\Documents\IAR\Assignment_2_2\project\Debug\Obj: [1]
+    main.o                  4
+    ----------------------------------
+    Total:                  4
+
+dl6M_tln.a: [2]
+    exit.o                  8
+    low_level_init.o        4
+    ----------------------------------
+    Total:                 12
+
+rt6M_tl.a: [3]
+    cexit.o                10
+    cmain.o                30
+    cstartup_M.o           28
+    vector_table_M.o       66
+    ----------------------------------
+    Total:                134
+
+shb_l.a: [4]
+    exit.o                 20
+    ----------------------------------
+    Total:                 20
+
+    Gaps                    2
+    Linker created               2'048
+--------------------------------------
+    Grand Total:          172    2'048
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                     Address  Size  Type      Object
+-----                     -------  ----  ----      ------
+?main                        0x41        Code  Gb  cmain.o [3]
+CSTACK$$Base          0x1fff'e000         --   Gb  - Linker created -
+CSTACK$$Limit         0x1fff'e800         --   Gb  - Linker created -
+Region$$Table$$Base           0x0         --   Gb  - Linker created -
+Region$$Table$$Limit          0x0         --   Gb  - Linker created -
+__cmain                      0x41        Code  Gb  cmain.o [3]
+__exit                       0x7d  0x14  Code  Gb  exit.o [4]
+__iar_program_start          0x91        Code  Gb  cstartup_M.o [3]
+__low_level_init             0x5f   0x4  Code  Gb  low_level_init.o [2]
+__vector_table                0x0        Data  Gb  vector_table_M.o [3]
+_call_main                   0x4d        Code  Gb  cmain.o [3]
+_exit                        0x71        Code  Gb  cexit.o [3]
+_main                        0x57        Code  Gb  cmain.o [3]
+exit                         0x67   0x8  Code  Gb  exit.o [2]
+main                         0x63   0x4  Code  Gb  main.o [1]
+
+
+[1] = F:\Libraries\Documents\IAR\Assignment_2_2\project\Debug\Obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+    172 bytes of readonly  code memory
+  2'048 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

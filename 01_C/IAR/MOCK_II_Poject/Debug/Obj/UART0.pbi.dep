@@ -1,0 +1,7 @@
+UART0.pbi: \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\src\UART0.c \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\inc\UART0.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\inc/QUEUE.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\board\inc\MKL46Z256VLL4.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\board\inc/REG_ADDR.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject\Application\inc/GPIO.h

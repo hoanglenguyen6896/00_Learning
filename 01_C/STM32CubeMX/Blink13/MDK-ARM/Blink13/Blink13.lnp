@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"blink13\startup_stm32f103xb.o"
+"blink13\main.o"
+"blink13\stm32f1xx_it.o"
+"blink13\stm32f1xx_hal_msp.o"
+"blink13\stm32f1xx_hal_gpio_ex.o"
+"blink13\stm32f1xx_hal_tim.o"
+"blink13\stm32f1xx_hal_tim_ex.o"
+"blink13\stm32f1xx_hal.o"
+"blink13\stm32f1xx_hal_rcc.o"
+"blink13\stm32f1xx_hal_rcc_ex.o"
+"blink13\stm32f1xx_hal_gpio.o"
+"blink13\stm32f1xx_hal_dma.o"
+"blink13\stm32f1xx_hal_cortex.o"
+"blink13\stm32f1xx_hal_pwr.o"
+"blink13\stm32f1xx_hal_flash.o"
+"blink13\stm32f1xx_hal_flash_ex.o"
+"blink13\stm32f1xx_hal_exti.o"
+"blink13\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "Blink13\Blink13.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Blink13.map" -o Blink13\Blink13.axf

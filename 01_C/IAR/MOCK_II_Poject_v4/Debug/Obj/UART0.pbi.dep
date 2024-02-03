@@ -1,0 +1,18 @@
+UART0.pbi: \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\app\peripheral\src\UART0.c \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\app\peripheral\inc\UART0.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\app\utility\inc\QUEUE.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\board\inc\MKL46Z4.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\board\CMSIS\Include\core_cm0plus.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdint.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Defaults.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\board\CMSIS\Include/core_cmInstr.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\cmsis_iar.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c/iccarm_builtin.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\board\CMSIS\Include/core_cmFunc.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\board\startup\system_MKL46Z4.h \
+  F:\Libraries\Documents\IAR\MOCK_II_Poject_v4\app\peripheral\inc/GPIO.h

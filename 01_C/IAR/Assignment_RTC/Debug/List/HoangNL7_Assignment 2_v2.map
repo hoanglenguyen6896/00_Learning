@@ -1,0 +1,266 @@
+###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  30/Dec/2020  13:27:00
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\Exe\_Assignment 2_v2.out
+#    Map file     =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\List\_Assignment 2_v2.map
+#    Command line =
+#        -f C:\Users\H\AppData\Local\Temp\EWE3B4.tmp
+#        ("F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj\BUTTON.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj\HAL.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj\LED.o"
+#        "F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj\main.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\Obj\startup_MKL46Z4.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\Obj\system_MKL46Z4.o" --no_out_extension -o
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\Exe\_Assignment 2_v2.out" --map
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        3\Debug\List\_Assignment 2_v2.map" --config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        8.4\arm\config\linker\NXP\MKL46Z256xxx4.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x0 to 0x3ff] |
+                [from 0x410 to 0x3'ffff] { ro };
+define block CSTACK with size = 2K, alignment = 8 { };
+define block HEAP with size = 4K, alignment = 8 { };
+"P3":  place in [from 0x1fff'e000 to 0x1fff'ffff] |
+                [from 0x2000'0000 to 0x2000'5fff] {
+          rw, block CSTACK, block HEAP };
+"P5":  place in [from 0x400 to 0x40f] { section FlashConfig };
+initialize by copy { rw };
+
+No sections matched the following patterns:
+
+  ro section application_specific_ro  in "P2|P4"
+  rw section application_specific_rw  in "P2|P4"
+
+
+  Section            Kind         Address   Size  Object
+  -------            ----         -------   ----  ------
+"A0":                                       0xc0
+  .intvec            ro code          0x0   0xc0  startup_MKL46Z4.o [1]
+                                   - 0xc0   0xc0
+
+"P1", part 1 of 2:                          0xec
+  .text              ro code         0xc0   0xe4  LED.o [1]
+  Initializer bytes  const          0x1a4    0x8  <for P3 s0>
+                                  - 0x1ac   0xec
+
+"P5":                                       0x10
+  FlashConfig        ro code        0x400   0x10  startup_MKL46Z4.o [1]
+                                  - 0x410   0x10
+
+"P1", part 2 of 2:                         0x400
+  .text              ro code        0x410  0x1a4  BUTTON.o [1]
+  .text              ro code        0x5b4   0xa8  HAL.o [1]
+  .text              ro code        0x65c   0x42  main.o [1]
+  .text              ro code        0x69e   0x30  copy_init3.o [3]
+  .text              ro code        0x6ce    0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x6d0   0x28  data_init.o [3]
+  .text              ro code        0x6f8   0x24  startup_MKL46Z4.o [1]
+  .iar.init_table    const          0x71c   0x14  - Linker created -
+  .text              ro code        0x730   0x1e  cmain.o [3]
+  .text              ro code        0x74e    0x4  low_level_init.o [2]
+  .text              ro code        0x752    0x8  exit.o [2]
+  .text              ro code        0x75a    0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x75c    0xa  cexit.o [3]
+  .text              ro code        0x766    0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x768   0x14  exit.o [4]
+  .text              ro code        0x77c   0x1c  cstartup_M.o [3]
+  .text              ro code        0x798    0xc  system_MKL46Z4.o [1]
+  .text              ro code        0x7a4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7ac    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7b4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7bc    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7c4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7cc    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7d4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7dc    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7e4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7ec    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7f4    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x7fc    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x804    0x8  startup_MKL46Z4.o [1]
+  .text              ro code        0x80c    0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x80e    0x2  startup_MKL46Z4.o [1]
+  .rodata            const          0x810    0x0  copy_init3.o [3]
+                                  - 0x810  0x400
+
+"P3", part 1 of 2:                           0x8
+  P3 s0                       0x1fff'e000    0x8  <Init block>
+    .data            inited   0x1fff'e000    0x1  BUTTON.o [1]
+    .data            inited   0x1fff'e001    0x1  BUTTON.o [1]
+    .data            inited   0x1fff'e002    0x1  BUTTON.o [1]
+    .data            inited   0x1fff'e003    0x1  BUTTON.o [1]
+    .data            inited   0x1fff'e004    0x1  LED.o [1]
+    .bss             inited   0x1fff'e005    0x1  BUTTON.o [1]
+    .bss             inited   0x1fff'e006    0x1  LED.o [1]
+                            - 0x1fff'e008    0x8
+
+"P3", part 2 of 2:                         0x800
+  CSTACK                      0x1fff'e008  0x800  <Block>
+    CSTACK           uninit   0x1fff'e008  0x800  <Block tail>
+                            - 0x1fff'e808  0x800
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+        0x1ac        0x3ff     0x254
+        0x810     0x3'ffff  0x3'f7f0
+  0x1fff'e808  0x1fff'ffff    0x17f8
+  0x2000'0000  0x2000'5fff    0x6000
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Copy (__iar_copy_init3)
+    1 source range, total size 0x8 (114% of destination):
+                0x1a4   0x8
+    1 destination range, total size 0x7:
+          0x1fff'e000   0x7
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module             ro code  ro data  rw data
+    ------             -------  -------  -------
+command line/config:
+    --------------------------------------------
+    Total:
+
+F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj: [1]
+    BUTTON.o               420        5        5
+    HAL.o                  168
+    LED.o                  228        2        2
+    main.o                  66
+    startup_MKL46Z4.o      358
+    system_MKL46Z4.o        12
+    --------------------------------------------
+    Total:               1'252        7        7
+
+dl6M_tln.a: [2]
+    exit.o                   8
+    low_level_init.o         4
+    --------------------------------------------
+    Total:                  12
+
+rt6M_tl.a: [3]
+    cexit.o                 10
+    cmain.o                 30
+    copy_init3.o            48
+    cstartup_M.o            28
+    data_init.o             40
+    --------------------------------------------
+    Total:                 156
+
+shb_l.a: [4]
+    exit.o                  20
+    --------------------------------------------
+    Total:                  20
+
+    Linker created                   21    2'048
+------------------------------------------------
+    Grand Total:         1'440       28    2'055
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address  Size  Type      Object
+-----                       -------  ----  ----      ------
+.iar.init_table$$Base         0x71c         --   Gb  - Linker created -
+.iar.init_table$$Limit        0x730         --   Gb  - Linker created -
+?main                         0x731        Code  Gb  cmain.o [3]
+BUTTON_vCheckButtonMode1
+                              0x411  0x4a  Code  Gb  BUTTON.o [1]
+BUTTON_vCheckButtonMode2A
+                              0x45b  0xa0  Code  Gb  BUTTON.o [1]
+BUTTON_vCheckButtonMode2B
+                              0x4fb  0xa2  Code  Gb  BUTTON.o [1]
+CSTACK$$Base            0x1fff'e008         --   Gb  - Linker created -
+CSTACK$$Limit           0x1fff'e808         --   Gb  - Linker created -
+HAL_vDelay                    0x64d  0x10  Code  Gb  HAL.o [1]
+HAL_vInit                     0x5b5  0x7c  Code  Gb  HAL.o [1]
+LED_vDimLED                   0x101  0x94  Code  Gb  LED.o [1]
+LED_vStepLED                   0xc1  0x40  Code  Gb  LED.o [1]
+Region$$Table$$Base           0x71c         --   Gb  - Linker created -
+Region$$Table$$Limit          0x730         --   Gb  - Linker created -
+SystemInit                    0x799   0x8  Code  Gb  system_MKL46Z4.o [1]
+__Vectors                       0x0         --   Gb  startup_MKL46Z4.o [1]
+__Vectors_End                  0xc0        Data  Gb  startup_MKL46Z4.o [1]
+__Vectors_Size {Abs}           0xc0         --   Gb  startup_MKL46Z4.o [1]
+__cmain                       0x731        Code  Gb  cmain.o [3]
+__exit                        0x769  0x14  Code  Gb  exit.o [4]
+__iar_copy_init3              0x69f  0x30  Code  Gb  copy_init3.o [3]
+__iar_data_init3              0x6d1  0x28  Code  Gb  data_init.o [3]
+__iar_program_start           0x77d        Code  Gb  cstartup_M.o [3]
+__low_level_init              0x74f   0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0        Data  Gb  startup_MKL46Z4.o [1]
+__vector_table_0x1c            0x1c        Data  Gb  startup_MKL46Z4.o [1]
+_call_main                    0x73d        Code  Gb  cmain.o [3]
+_exit                         0x75d        Code  Gb  cexit.o [3]
+_main                         0x747        Code  Gb  cmain.o [3]
+exit                          0x753   0x8  Code  Gb  exit.o [2]
+g_s_u8But1              0x1fff'e001   0x1  Data  Lc  BUTTON.o [1]
+g_s_u8But2              0x1fff'e003   0x1  Data  Lc  BUTTON.o [1]
+g_s_u8ButOld1           0x1fff'e000   0x1  Data  Lc  BUTTON.o [1]
+g_s_u8ButOld2           0x1fff'e002   0x1  Data  Lc  BUTTON.o [1]
+g_s_u8DimBrightness     0x1fff'e006   0x1  Data  Lc  LED.o [1]
+g_s_u8DimUp             0x1fff'e004   0x1  Data  Lc  LED.o [1]
+g_s_u8Status1           0x1fff'e005   0x1  Data  Lc  BUTTON.o [1]
+main                          0x65d  0x42  Code  Gb  main.o [1]
+
+
+[1] = F:\Libraries\Documents\IAR\_Assignment 3\Debug\Obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+  1'440 bytes of readonly  code memory
+     28 bytes of readonly  data memory
+  2'055 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

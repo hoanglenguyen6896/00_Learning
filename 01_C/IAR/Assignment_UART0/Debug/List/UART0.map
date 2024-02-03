@@ -1,0 +1,287 @@
+###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  16/Jan/2021  22:57:54
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Exe\UART0.out
+#    Map file     =
+#        F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\List\UART0.map
+#    Command line =
+#        -f C:\Users\H\AppData\Local\Temp\EW61EB.tmp
+#        ("F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\main.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\QUEUE.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\SREC.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\startup_MKL46Z4.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\system_MKL46Z4.o"
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Obj\UART0.o" --no_out_extension -o
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\Exe\UART0.out" --map
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\Debug\List\UART0.map" --config
+#        "F:\Libraries\Documents\IAR\_Assignment
+#        5_UART0\board\linker\MKL46Z256xxx4_flash.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0xa000 { ro section .intvec };
+"P1":  place in [from 0xa400 to 0xa40f] { section FlashConfig };
+"P2":  place in [from 0xa000 to 0xa1ff] |
+                [from 0xa410 to 0x3'ffff] { ro };
+define block RW { rw };
+"P3":  place in [from 0x1fff'e000 to 0x2000'5bff] { block RW };
+define block ZI { zi };
+"P4":  place in [from 0x1fff'e000 to 0x2000'5bff] { block ZI };
+define block CSTACK with size = 1K, alignment = 8 { };
+"P6":  place in [from 0x2000'5c00 to 0x2000'5fff] { block CSTACK };
+
+No sections matched the following patterns:
+
+  section m_interrupts_ram  in "P7"
+
+
+  Section          Kind         Address   Size  Object
+  -------          ----         -------   ----  ------
+"A0":                                     0xc0
+  .intvec          ro code       0xa000   0xc0  startup_MKL46Z4.o [1]
+                               - 0xa0c0   0xc0
+
+"P2", part 1 of 2:                        0xee
+  .text            ro code       0xa0c0   0xae  I32DivModFast.o [3]
+  .text            ro code       0xa16e    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xa170    0x2  IntDivZer.o [3]
+  .text            ro code       0xa172   0x3c  zero_init3.o [3]
+                               - 0xa1ae   0xee
+
+"P1":                                     0x10
+  FlashConfig      ro code       0xa400   0x10  startup_MKL46Z4.o [1]
+                               - 0xa410   0x10
+
+"P2", part 2 of 2:                       0x6f8
+  .text            ro code       0xa410  0x224  UART0.o [1]
+  .text            ro code       0xa634  0x18c  QUEUE.o [1]
+  .text            ro code       0xa7c0  0x18a  SREC.o [1]
+  .text            ro code       0xa94c   0x58  main.o [1]
+  .text            ro code       0xa9a4   0x28  data_init.o [3]
+  .text            ro code       0xa9cc   0x24  startup_MKL46Z4.o [1]
+  .iar.init_table  const         0xa9f0   0x10  - Linker created -
+  .rodata          const         0xaa00   0x20  main.o [1]
+  .text            ro code       0xaa20   0x1e  cmain.o [3]
+  .text            ro code       0xaa3e    0x4  low_level_init.o [2]
+  .text            ro code       0xaa42    0x8  exit.o [2]
+  .text            ro code       0xaa4a    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xaa4c    0xa  cexit.o [3]
+  .text            ro code       0xaa56    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xaa58   0x14  exit.o [4]
+  .text            ro code       0xaa6c   0x1c  cstartup_M.o [3]
+  .text            ro code       0xaa88    0xc  system_MKL46Z4.o [1]
+  .rodata          const         0xaa94    0x8  main.o [1]
+  .rodata          const         0xaa9c    0x8  main.o [1]
+  .text            ro code       0xaaa4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaaac    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaab4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaabc    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaac4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaacc    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaad4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaadc    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaae4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaaec    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaaf4    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xaafc    0x8  startup_MKL46Z4.o [1]
+  .text            ro code       0xab04    0x2  startup_MKL46Z4.o [1]
+  .text            ro code       0xab06    0x2  startup_MKL46Z4.o [1]
+  .rodata          const         0xab08    0x0  zero_init3.o [3]
+                               - 0xab08  0x6f8
+
+"P3-P4":                                 0x1a8
+  ZI                        0x1fff'e000  0x1a8  <Block>
+    .bss           zero     0x1fff'e000  0x198  QUEUE.o [1]
+    .bss           zero     0x1fff'e198    0x4  QUEUE.o [1]
+    .bss           zero     0x1fff'e19c    0x4  UART0.o [1]
+    .bss           zero     0x1fff'e1a0    0x1  QUEUE.o [1]
+    .bss           zero     0x1fff'e1a1    0x1  QUEUE.o [1]
+    .bss           zero     0x1fff'e1a2    0x1  QUEUE.o [1]
+    .bss           zero     0x1fff'e1a3    0x1  QUEUE.o [1]
+    .bss           zero     0x1fff'e1a4    0x1  UART0.o [1]
+                          - 0x1fff'e1a8  0x1a8
+
+"P6":                                    0x400
+  CSTACK                    0x2000'5c00  0x400  <Block>
+    CSTACK         uninit   0x2000'5c00  0x400  <Block tail>
+                          - 0x2000'6000  0x400
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+       0xa1ae       0xa1ff      0x52
+       0xab08     0x3'ffff  0x3'54f8
+  0x1fff'e1a8  0x2000'5bff    0x7a58
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x1a5:
+          0x1fff'e000  0x1a5
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module             ro code  ro data  rw data
+    ------             -------  -------  -------
+command line/config:
+    --------------------------------------------
+    Total:
+
+F:\Libraries\Documents\IAR\Assignment_UART0\Debug\Obj: [1]
+    QUEUE.o                396               416
+    SREC.o                 394
+    UART0.o                548                 5
+    main.o                  88       48
+    startup_MKL46Z4.o      350
+    system_MKL46Z4.o        12
+    --------------------------------------------
+    Total:               1'788       48      421
+
+dl6M_tln.a: [2]
+    exit.o                   8
+    low_level_init.o         4
+    --------------------------------------------
+    Total:                  12
+
+rt6M_tl.a: [3]
+    I32DivModFast.o        174
+    IntDivZer.o              2
+    cexit.o                 10
+    cmain.o                 30
+    cstartup_M.o            28
+    data_init.o             40
+    zero_init3.o            60
+    --------------------------------------------
+    Total:                 344
+
+shb_l.a: [4]
+    exit.o                  20
+    --------------------------------------------
+    Total:                  20
+
+    Gaps                     2
+    Linker created                   16    1'024
+------------------------------------------------
+    Grand Total:         2'166       64    1'445
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base        0xa9f0          --   Gb  - Linker created -
+.iar.init_table$$Limit       0xaa00          --   Gb  - Linker created -
+?main                        0xaa21         Code  Gb  cmain.o [3]
+CSTACK$$Base            0x2000'5c00          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'6000          --   Gb  - Linker created -
+NVIC_EnableIRQ               0xa411    0xe  Code  Lc  UART0.o [1]
+QUEUE_u8PopQ                 0xa6cf   0xd8  Code  Gb  QUEUE.o [1]
+QUEUE_vPushQ                 0xa635   0x9a  Code  Gb  QUEUE.o [1]
+Queue                   0x1fff'e000  0x198  Data  Lc  QUEUE.o [1]
+Region$$Table$$Base          0xa9f0          --   Gb  - Linker created -
+Region$$Table$$Limit         0xaa00          --   Gb  - Linker created -
+SREC_ChkByteCount            0xa83b   0x38  Code  Lc  SREC.o [1]
+SREC_ChkSum                  0xa873   0x48  Code  Lc  SREC.o [1]
+SREC_u8CharToNumber          0xa7c1   0x18  Code  Lc  SREC.o [1]
+SREC_u8ChkChar               0xa7d9   0x62  Code  Lc  SREC.o [1]
+SREC_u8ChkLineCount          0xa8fd   0x4e  Code  Gb  SREC.o [1]
+SREC_u8ChkSRECLine           0xa8bb   0x42  Code  Gb  SREC.o [1]
+SystemInit                   0xaa89    0x8  Code  Gb  system_MKL46Z4.o [1]
+UART0_IRQHandler             0xa5cf   0x16  Code  Gb  UART0.o [1]
+UART0_vBaudGen               0xa41f   0x8c  Code  Lc  UART0.o [1]
+UART0_vPutChar               0xa4ab   0x10  Code  Lc  UART0.o [1]
+UART0_vPutString             0xa5af   0x20  Code  Gb  UART0.o [1]
+UART0_vUART0Init             0xa4bb   0xf4  Code  Gb  UART0.o [1]
+ZI$$Base                0x1fff'e000          --   Gb  - Linker created -
+ZI$$Limit               0x1fff'e1a8          --   Gb  - Linker created -
+__RAM_VECTOR_TABLE_SIZE {Abs}
+                                0x0         Data  Gb  <internal module>
+__VECTOR_RAM {Abs}           0xa000         Data  Gb  <internal module>
+__VECTOR_TABLE {Abs}         0xa000         Data  Gb  <internal module>
+__Vectors                    0xa000          --   Gb  startup_MKL46Z4.o [1]
+__Vectors_End                0xa0c0         Data  Gb  startup_MKL46Z4.o [1]
+__Vectors_Size {Abs}           0xc0          --   Gb  startup_MKL46Z4.o [1]
+__aeabi_idiv0                0xa171         Code  Gb  IntDivZer.o [3]
+__aeabi_uidiv                0xa0c1         Code  Gb  I32DivModFast.o [3]
+__aeabi_uidivmod             0xa0c1         Code  Gb  I32DivModFast.o [3]
+__cmain                      0xaa21         Code  Gb  cmain.o [3]
+__exit                       0xaa59   0x14  Code  Gb  exit.o [4]
+__iar_data_init3             0xa9a5   0x28  Code  Gb  data_init.o [3]
+__iar_program_start          0xaa6d         Code  Gb  cstartup_M.o [3]
+__iar_zero_init3             0xa173   0x3c  Code  Gb  zero_init3.o [3]
+__low_level_init             0xaa3f    0x4  Code  Gb  low_level_init.o [2]
+__vector_table               0xa000         Data  Gb  startup_MKL46Z4.o [1]
+__vector_table_0x1c          0xa01c         Data  Gb  startup_MKL46Z4.o [1]
+_call_main                   0xaa2d         Code  Gb  cmain.o [3]
+_exit                        0xaa4d         Code  Gb  cexit.o [3]
+_main                        0xaa37         Code  Gb  cmain.o [3]
+exit                         0xaa43    0x8  Code  Gb  exit.o [2]
+main                         0xa94d   0x58  Code  Gb  main.o [1]
+s_u32SBR                0x1fff'e19c    0x4  Data  Lc  UART0.o [1]
+s_u32TotalDataLine      0x1fff'e198    0x4  Data  Lc  QUEUE.o [1]
+s_u8ColPush             0x1fff'e1a1    0x1  Data  Lc  QUEUE.o [1]
+s_u8FileChk             0x1fff'e1a3    0x1  Data  Lc  QUEUE.o [1]
+s_u8OSR                 0x1fff'e1a4    0x1  Data  Lc  UART0.o [1]
+s_u8RowPop              0x1fff'e1a2    0x1  Data  Lc  QUEUE.o [1]
+s_u8RowPush             0x1fff'e1a0    0x1  Data  Lc  QUEUE.o [1]
+
+
+[1] = F:\Libraries\Documents\IAR\Assignment_UART0\Debug\Obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+  2'166 bytes of readonly  code memory
+     64 bytes of readonly  data memory
+  1'445 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

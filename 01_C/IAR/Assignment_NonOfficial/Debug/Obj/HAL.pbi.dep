@@ -1,0 +1,5 @@
+HAL.pbi: \
+  F:\Libraries\Documents\IAR\Assignment\ 3\Application\src\HAL.c \
+  F:\Libraries\Documents\IAR\Assignment\ 3\Application\inc\HAL.h \
+  F:\Libraries\Documents\IAR\Assignment\ 3\board\inc\MKL46Z256VLL4.h \
+  F:\Libraries\Documents\IAR\Assignment\ 3\board\inc/REG_ADDR.h

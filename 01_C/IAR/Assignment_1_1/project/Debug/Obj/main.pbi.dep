@@ -1,0 +1,15 @@
+main.pbi: \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\project\..\MKL46Z\system_MKL46Z4.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\project\..\CMSIS\Include\core_cmFunc.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\iccarm_builtin.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\cmsis_iar.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\project\..\CMSIS\Include\core_cmInstr.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Product.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Config_Normal.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\DLib_Defaults.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\yvals.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\ycheck.h \
+  C:\Program\ Files\ (x86)\IAR\ Systems\Embedded\ Workbench\ 8.4\arm\inc\c\stdint.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\project\..\CMSIS\Include\core_cm0plus.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\project\..\MKL46Z\MKL46Z4.h \
+  F:\Libraries\Documents\IAR\_Assignment\ 1\ -\ Copy\source\main.c

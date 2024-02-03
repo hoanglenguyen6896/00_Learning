@@ -258,4 +258,4 @@ if __name__ == "__main__":
 					out_file.writelines(_line)
 		if len(IMG_TXT_INFO) > write_idx:
 			print(PRINT_COLOR["ERROR"] + "ERROR: Not all images are used")
-	# print(sys.argv)
+	print(argv.key, "\n", argv.link)

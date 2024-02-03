@@ -131,7 +131,7 @@ if __name__ == "__main__":
 		exit()
 	else:
 		PRIMARY_KEY = " ".join(sys.argv[1:])
-	with open("E:/Learning/02_Python/02_Seo_Replacetext/IN.html", \
+	with open("E:/Learning/00_Git/00_Learning/02_Python/02_Tools/01_Seo_Replacetext_YODY/IN.html", \
 						"r", \
 						encoding="utf8") \
 	as f:
@@ -151,7 +151,7 @@ if __name__ == "__main__":
 		IMG_TXT_INFO[index] = IMG_TXT_INFO[index].\
 										replace("\" /", "\" /></p>")
 	write_idx = 0
-	with open("E:/Learning/02_Python/02_Seo_Replacetext/OUT.html", \
+	with open("E:/Learning/00_Git/00_Learning/02_Python/02_Tools/01_Seo_Replacetext_YODY/OUT.html", \
 						"w", \
 						encoding="utf8") \
 	as out_file:

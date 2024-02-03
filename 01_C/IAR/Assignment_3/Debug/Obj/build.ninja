@@ -1,0 +1,29 @@
+#Generating source browse information for project Systick
+
+
+#Abbreviations
+cc = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\SourceIndexer.exe
+ll = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\PbdLink.exe
+bd = C$:\Program$ Files$ (x86)\IAR$ Systems\Embedded$ Workbench$ 8.4\common\bin\makeBrowseData.exe
+
+
+
+#Rules
+rule index
+  depfile = $out.dep
+  command = $cc -out=$out -f $in
+rule link
+  command = $ll -M $out $in
+rule browsedata
+  command = $bd $in -output  $out
+
+
+
+#Build steps
+build HAL.pbi : index HAL.xcl
+build main.pbi : index main.xcl
+build system_MKL46Z4.pbi : index system_MKL46Z4.xcl
+build Systick.pbd : link HAL.pbi main.pbi system_MKL46Z4.pbi
+build Systick.pbw : browsedata Systick.pbd
+
+

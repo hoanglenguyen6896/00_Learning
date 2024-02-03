@@ -1,0 +1,476 @@
+###############################################################################
+#
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  25/Dec/2020  10:26:48
+# Copyright 2007-2020 IAR Systems AB.
+#
+#    Output file  =
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Exe\freertos_project.out
+#    Map file     =
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\List\freertos_project.map
+#    Command line =
+#        -f C:\Users\H\AppData\Local\Temp\EW99F7.tmp
+#        (F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\croutine.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\event_groups.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\heap_4.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\LED.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\list.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\main.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\port.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\portasm.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\queue.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\startup_MKL46Z4.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\stream_buffer.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\system_MKL46Z4.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\tasks.o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj\timers.o
+#        --no_out_extension -o
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\Exe\freertos_project.out
+#        --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb
+#        --map
+#        F:\Libraries\Documents\IAR\rtos_p1\Debug\List\freertos_project.map
+#        --config
+#        F:\Libraries\Documents\IAR\rtos_p1\board\MKL46Z\MKL46Z256xxx4_flash.icf
+#        --semihosting --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because some modules are built with
+size limitations (and not runtime checking), and --advanced_heap
+was not specified.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at address 0x0 { ro section .intvec };
+"P1":  place in [from 0x400 to 0x40f] { section FlashConfig };
+"P2":  place in [from 0x0 to 0x1ff] |
+                [from 0x410 to 0x3'ffff] { ro };
+define block RW { rw };
+"P3":  place in [from 0x1fff'e000 to 0x2000'5bff] { block RW };
+define block ZI { zi };
+"P4":  place in [from 0x1fff'e000 to 0x2000'5bff] { block ZI };
+define block CSTACK with size = 1K, alignment = 8 { };
+"P6":  place in [from 0x2000'5c00 to 0x2000'5fff] { block CSTACK };
+initialize by copy { rw, section .textrw };
+
+No sections matched the following patterns:
+
+  section m_interrupts_ram  in "P7"
+
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                        0xc0
+  .intvec            ro code          0x0    0xc0  startup_MKL46Z4.o [1]
+                                   - 0xc0    0xc0
+
+"P2", part 1 of 2:                           0xee
+  .text              ro code         0xc0    0x4e  ABImemset.o [3]
+  .text              ro code        0x10e    0x9a  list.o [1]
+  .text              ro code        0x1a8     0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x1aa     0x2  startup_MKL46Z4.o [1]
+  .text              ro code        0x1ac     0x2  IntDivZer.o [3]
+                                  - 0x1ae    0xee
+
+"P1":                                        0x10
+  FlashConfig        ro code        0x400    0x10  startup_MKL46Z4.o [1]
+                                  - 0x410    0x10
+
+"P2", part 2 of 2:                         0x1938
+  .text              ro code        0x410   0x7e8  tasks.o [1]
+  .text              ro code        0xbf8   0x23c  heap_4.o [1]
+  .text              ro code        0xe34   0x108  port.o [1]
+  .text              ro code        0xf3c   0x3c4  timers.o [1]
+  CODE               ro code       0x1300    0x7c  portasm.o [1]
+  .text              ro code       0x137c    0xae  I32DivModFast.o [3]
+  .text              ro code       0x142c   0x5ea  queue.o [1]
+  .text              ro code       0x1a18    0x4e  ABImemcpy.o [3]
+  .text              ro code       0x1a68    0x9c  main.o [1]
+  .text              ro code       0x1b04    0x58  LED.o [1]
+  .text              ro code       0x1b5c    0x3c  zero_init3.o [3]
+  .text              ro code       0x1b98    0x30  copy_init3.o [3]
+  .text              ro code       0x1bc8    0x28  data_init.o [3]
+  .text              ro code       0x1bf0    0x24  startup_MKL46Z4.o [1]
+  .iar.init_table    const         0x1c14    0x24  - Linker created -
+  .text              ro code       0x1c38    0x1e  cmain.o [3]
+  .text              ro code       0x1c56     0x4  low_level_init.o [2]
+  .text              ro code       0x1c5a     0x8  exit.o [2]
+  .text              ro code       0x1c64     0xa  cexit.o [3]
+  .text              ro code       0x1c70    0x14  exit.o [4]
+  .text              ro code       0x1c84    0x1c  cstartup_M.o [3]
+  .rodata            const         0x1ca0     0xc  main.o [1]
+  .text              ro code       0x1cac     0xc  system_MKL46Z4.o [1]
+  Initializer bytes  const         0x1cb8     0xc  <for RW-1>
+  .rodata            const         0x1cc4     0x8  tasks.o [1]
+  .rodata            const         0x1ccc     0x8  timers.o [1]
+  .rodata            const         0x1cd4     0x8  timers.o [1]
+  .text              ro code       0x1cdc     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1ce4     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1cec     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1cf4     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1cfc     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d04     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d0c     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d14     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d1c     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d24     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d2c     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d34     0x8  startup_MKL46Z4.o [1]
+  .text              ro code       0x1d3c     0x8  startup_MKL46Z4.o [1]
+  .rodata            const         0x1d44     0x4  heap_4.o [1]
+  .rodata            const         0x1d48     0x0  zero_init3.o [3]
+  .rodata            const         0x1d48     0x0  copy_init3.o [3]
+                                 - 0x1d48  0x1938
+
+"P3-P4", part 1 of 2:                         0xc
+  RW                          0x1fff'e000     0xc  <Block>
+    RW-1                      0x1fff'e000     0xc  <Init block>
+      .data          inited   0x1fff'e000     0x4  port.o [1]
+      .data          inited   0x1fff'e004     0x4  system_MKL46Z4.o [1]
+      .data          inited   0x1fff'e008     0x4  tasks.o [1]
+                            - 0x1fff'e00c     0xc
+
+"P3-P4", part 2 of 2:                      0x15a0
+  ZI                          0x1fff'e00c  0x15a0  <Block>
+    .bss             zero     0x1fff'e00c  0x1400  heap_4.o [1]
+    .bss             zero     0x1fff'f40c     0x8  heap_4.o [1]
+    .bss             zero     0x1fff'f414     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f418     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f41c     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f420     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f424     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f428     0x4  heap_4.o [1]
+    .bss             zero     0x1fff'f42c    0x40  queue.o [1]
+    .bss             zero     0x1fff'f46c     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f470    0x64  tasks.o [1]
+    .bss             zero     0x1fff'f4d4    0x14  tasks.o [1]
+    .bss             zero     0x1fff'f4e8    0x14  tasks.o [1]
+    .bss             zero     0x1fff'f4fc     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f500     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f504    0x14  tasks.o [1]
+    .bss             zero     0x1fff'f518    0x14  tasks.o [1]
+    .bss             zero     0x1fff'f52c     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f530    0x14  tasks.o [1]
+    .bss             zero     0x1fff'f544     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f548     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f54c     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f550     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f554     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f558     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f55c     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f560     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f564     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f568     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f56c     0x4  tasks.o [1]
+    .bss             zero     0x1fff'f570    0x14  timers.o [1]
+    .bss             zero     0x1fff'f584    0x14  timers.o [1]
+    .bss             zero     0x1fff'f598     0x4  timers.o [1]
+    .bss             zero     0x1fff'f59c     0x4  timers.o [1]
+    .bss             zero     0x1fff'f5a0     0x4  timers.o [1]
+    .bss             zero     0x1fff'f5a4     0x4  timers.o [1]
+    .bss             zero     0x1fff'f5a8     0x4  timers.o [1]
+                            - 0x1fff'f5ac  0x15a0
+
+"P6":                                       0x400
+  CSTACK                      0x2000'5c00   0x400  <Block>
+    CSTACK           uninit   0x2000'5c00   0x400  <Block tail>
+                            - 0x2000'6000   0x400
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+        0x1ae        0x1ff      0x52
+       0x1d48     0x3'ffff  0x3'e2b8
+  0x1fff'f5ac  0x2000'5bff    0x6654
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x15a0:
+          0x1fff'e00c  0x15a0
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0xc:
+               0x1cb8     0xc
+    1 destination range, total size 0xc:
+          0x1fff'e000     0xc
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module             ro code  ro data  rw data
+    ------             -------  -------  -------
+command line/config:
+    --------------------------------------------
+    Total:
+
+F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj: [1]
+    LED.o                   88
+    heap_4.o               572        4    5'152
+    list.o                 154
+    main.o                 156       12
+    port.o                 264        4        4
+    portasm.o              124
+    queue.o              1'514                64
+    startup_MKL46Z4.o      352
+    system_MKL46Z4.o        12        4        4
+    tasks.o              2'024       12      264
+    timers.o               964       16       60
+    --------------------------------------------
+    Total:               6'224       52    5'548
+
+dl6M_tln.a: [2]
+    exit.o                   8
+    low_level_init.o         4
+    --------------------------------------------
+    Total:                  12
+
+rt6M_tl.a: [3]
+    ABImemcpy.o             78
+    ABImemset.o             78
+    I32DivModFast.o        174
+    IntDivZer.o              2
+    cexit.o                 10
+    cmain.o                 30
+    copy_init3.o            48
+    cstartup_M.o            28
+    data_init.o             40
+    zero_init3.o            60
+    --------------------------------------------
+    Total:                 548
+
+shb_l.a: [4]
+    exit.o                  20
+    --------------------------------------------
+    Total:                  20
+
+    Gaps                    10
+    Linker created                   36    1'024
+------------------------------------------------
+    Grand Total:         6'814       88    6'572
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address    Size  Type      Object
+-----                       -------    ----  ----      ------
+.iar.init_table$$Base        0x1c14           --   Gb  - Linker created -
+.iar.init_table$$Limit       0x1c38           --   Gb  - Linker created -
+?main                        0x1c39          Code  Gb  cmain.o [3]
+CSTACK$$Base            0x2000'5c00           --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'6000           --   Gb  - Linker created -
+LED_vInitLed                 0x1b05    0x42  Code  Gb  LED.o [1]
+PendSV_Handler               0x1307          Code  Gb  portasm.o [1]
+RW$$Base                0x1fff'e000           --   Gb  - Linker created -
+RW$$Limit               0x1fff'e00c           --   Gb  - Linker created -
+Region$$Table$$Base          0x1c14           --   Gb  - Linker created -
+Region$$Table$$Limit         0x1c38           --   Gb  - Linker created -
+SVC_Handler                  0x1345          Code  Gb  portasm.o [1]
+SysTick_Handler               0xed7    0x20  Code  Gb  port.o [1]
+SystemCoreClock         0x1fff'e004     0x4  Data  Gb  system_MKL46Z4.o [1]
+SystemInit                   0x1cad     0x8  Code  Gb  system_MKL46Z4.o [1]
+ZI$$Base                0x1fff'e00c           --   Gb  - Linker created -
+ZI$$Limit               0x1fff'f5ac           --   Gb  - Linker created -
+__RAM_VECTOR_TABLE_SIZE {Abs}
+                                0x0          Data  Gb  <internal module>
+__VECTOR_RAM {Abs}              0x0          Data  Gb  <internal module>
+__VECTOR_TABLE {Abs}            0x0          Data  Gb  <internal module>
+__Vectors                       0x0           --   Gb  startup_MKL46Z4.o [1]
+__Vectors_End                  0xc0          Data  Gb  startup_MKL46Z4.o [1]
+__Vectors_Size {Abs}           0xc0           --   Gb  startup_MKL46Z4.o [1]
+__aeabi_idiv0                 0x1ad          Code  Gb  IntDivZer.o [3]
+__aeabi_memcpy               0x1a4d          Code  Gb  ABImemcpy.o [3]
+__aeabi_memcpy4              0x1a19          Code  Gb  ABImemcpy.o [3]
+__aeabi_memcpy8              0x1a19          Code  Gb  ABImemcpy.o [3]
+__aeabi_memset                 0xc1          Code  Gb  ABImemset.o [3]
+__aeabi_uidiv                0x137d          Code  Gb  I32DivModFast.o [3]
+__aeabi_uidivmod             0x137d          Code  Gb  I32DivModFast.o [3]
+__cmain                      0x1c39          Code  Gb  cmain.o [3]
+__exit                       0x1c71    0x14  Code  Gb  exit.o [4]
+__iar_Memcpy                 0x1a59          Code  Gb  ABImemcpy.o [3]
+__iar_Memset4_word             0xe1          Code  Gb  ABImemset.o [3]
+__iar_Memset_word              0xcd          Code  Gb  ABImemset.o [3]
+__iar_copy_init3             0x1b99    0x30  Code  Gb  copy_init3.o [3]
+__iar_data_init3             0x1bc9    0x28  Code  Gb  data_init.o [3]
+__iar_program_start          0x1c85          Code  Gb  cstartup_M.o [3]
+__iar_zero_init3             0x1b5d    0x3c  Code  Gb  zero_init3.o [3]
+__low_level_init             0x1c57     0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0          Data  Gb  startup_MKL46Z4.o [1]
+__vector_table_0x1c            0x1c          Data  Gb  startup_MKL46Z4.o [1]
+_call_main                   0x1c45          Code  Gb  cmain.o [3]
+_exit                        0x1c65          Code  Gb  cexit.o [3]
+_main                        0x1c4f          Code  Gb  cmain.o [3]
+exit                         0x1c5b     0x8  Code  Gb  exit.o [2]
+main                         0x1aaf    0x36  Code  Gb  main.o [1]
+prvAddCurrentTaskToDelayedList
+                              0xb85    0x5c  Code  Lc  tasks.o [1]
+prvAddNewTaskToReadyList
+                              0x537    0x80  Code  Lc  tasks.o [1]
+prvCheckForValidListAndQueue
+                             0x129d    0x46  Code  Lc  timers.o [1]
+prvCheckTasksWaitingTermination
+                              0xa39    0x36  Code  Lc  tasks.o [1]
+prvCopyDataFromQueue         0x18c9    0x2a  Code  Lc  queue.o [1]
+prvCopyDataToQueue           0x1849    0x80  Code  Lc  queue.o [1]
+prvDeleteTCB                  0xa81    0x12  Code  Lc  tasks.o [1]
+prvGetNextExpireTime         0x109b    0x26  Code  Lc  timers.o [1]
+prvHeapInit                   0xd59    0x5a  Code  Lc  heap_4.o [1]
+prvIdleTask                   0x9e1    0x14  Code  Lc  tasks.o [1]
+prvInitialiseNewQueue        0x1507    0x22  Code  Lc  queue.o [1]
+prvInitialiseNewTask          0x479    0xbe  Code  Lc  tasks.o [1]
+prvInitialiseTaskLists        0x9f5    0x44  Code  Lc  tasks.o [1]
+prvInsertBlockIntoFreeList
+                              0xdb3    0x5c  Code  Lc  heap_4.o [1]
+prvInsertTimerInActiveList
+                             0x10f9    0x3e  Code  Lc  timers.o [1]
+prvIsQueueEmpty              0x1961    0x1c  Code  Lc  queue.o [1]
+prvIsQueueFull               0x197f    0x1e  Code  Lc  queue.o [1]
+prvProcessExpiredTimer        0xfc9    0x5c  Code  Lc  timers.o [1]
+prvProcessReceivedCommands
+                             0x1139    0xf8  Code  Lc  timers.o [1]
+prvProcessTimerOrBlockTask
+                             0x1039    0x62  Code  Lc  timers.o [1]
+prvResetNextTaskUnblockTime
+                              0xa93    0x22  Code  Lc  tasks.o [1]
+prvSampleTimeNow             0x10c1    0x26  Code  Lc  timers.o [1]
+prvSampleTimeNow::xLastTime
+                        0x1fff'f5a8     0x4  Data  Lc  timers.o [1]
+prvSwitchTimerLists          0x1231    0x68  Code  Lc  timers.o [1]
+prvTaskExitError              0xe51    0x16  Code  Lc  port.o [1]
+prvTimerTask                 0x1025    0x14  Code  Lc  timers.o [1]
+prvUnlockQueue               0x18f3    0x6e  Code  Lc  queue.o [1]
+pvPortMalloc                  0xbf9    0xfc  Code  Gb  heap_4.o [1]
+pxCurrentTCB            0x1fff'f46c     0x4  Data  Gb  tasks.o [1]
+pxCurrentTimerList      0x1fff'f598     0x4  Data  Lc  timers.o [1]
+pxDelayedTaskList       0x1fff'f4fc     0x4  Data  Lc  tasks.o [1]
+pxEnd                   0x1fff'f414     0x4  Data  Lc  heap_4.o [1]
+pxOverflowDelayedTaskList
+                        0x1fff'f500     0x4  Data  Lc  tasks.o [1]
+pxOverflowTimerList     0x1fff'f59c     0x4  Data  Lc  timers.o [1]
+pxPortInitialiseStack         0xe35    0x1a  Code  Gb  port.o [1]
+pxReadyTasksLists       0x1fff'f470    0x64  Data  Lc  tasks.o [1]
+ucHeap                  0x1fff'e00c  0x1400  Data  Lc  heap_4.o [1]
+ulSetInterruptMaskFromISR
+                             0x1369          Code  Gb  portasm.o [1]
+uxCriticalNesting       0x1fff'e000     0x4  Data  Lc  port.o [1]
+uxCurrentNumberOfTasks  0x1fff'f544     0x4  Data  Lc  tasks.o [1]
+uxDeletedTasksWaitingCleanUp
+                        0x1fff'f52c     0x4  Data  Lc  tasks.o [1]
+uxListRemove                  0x181    0x28  Code  Gb  list.o [1]
+uxSchedulerSuspended    0x1fff'f56c     0x4  Data  Lc  tasks.o [1]
+uxTaskNumber            0x1fff'f560     0x4  Data  Lc  tasks.o [1]
+uxTopReadyPriority      0x1fff'f54c     0x4  Data  Lc  tasks.o [1]
+uxTopUsedPriority       0x1fff'e008     0x4  Data  Gb  tasks.o [1]
+vClearInterruptMaskFromISR
+                             0x1371          Code  Gb  portasm.o [1]
+vListInitialise               0x10f    0x1e  Code  Gb  list.o [1]
+vListInitialiseItem           0x12d     0x6  Code  Gb  list.o [1]
+vListInsert                   0x14b    0x36  Code  Gb  list.o [1]
+vListInsertEnd                0x133    0x18  Code  Gb  list.o [1]
+vPortEnterCritical            0xea5    0x14  Code  Gb  port.o [1]
+vPortExitCritical             0xeb9    0x1e  Code  Gb  port.o [1]
+vPortFree                     0xcf5    0x64  Code  Gb  heap_4.o [1]
+vPortStartFirstTask          0x1347          Code  Gb  portasm.o [1]
+vPortYield                    0xe91    0x12  Code  Gb  port.o [1]
+vQueueAddToRegistry          0x199f    0x28  Code  Gb  queue.o [1]
+vQueueWaitForMessageRestricted
+                             0x19cd    0x4a  Code  Gb  queue.o [1]
+vSetMSP                      0x1301          Code  Gb  portasm.o [1]
+vTaskBlinGreenkLed           0x1a69    0x22  Code  Gb  main.o [1]
+vTaskBlinRedkLed             0x1a8b    0x24  Code  Gb  main.o [1]
+vTaskDelay                    0x5b9    0x30  Code  Gb  tasks.o [1]
+vTaskInternalSetTimeOutState
+                              0x959     0xe  Code  Gb  tasks.o [1]
+vTaskMissedYield              0x9d9     0x8  Code  Gb  tasks.o [1]
+vTaskPlaceOnEventList         0x87d    0x20  Code  Gb  tasks.o [1]
+vTaskPlaceOnEventListRestricted
+                              0x8a9    0x2a  Code  Gb  tasks.o [1]
+vTaskStartScheduler           0x605    0x4e  Code  Gb  tasks.o [1]
+vTaskSuspendAll               0x655     0xa  Code  Gb  tasks.o [1]
+vTaskSwitchContext            0x821    0x5c  Code  Gb  tasks.o [1]
+xActiveTimerList1       0x1fff'f570    0x14  Data  Lc  timers.o [1]
+xActiveTimerList2       0x1fff'f584    0x14  Data  Lc  timers.o [1]
+xBlockAllocatedBit      0x1fff'f428     0x4  Data  Lc  heap_4.o [1]
+xDelayedTaskList1       0x1fff'f4d4    0x14  Data  Lc  tasks.o [1]
+xDelayedTaskList2       0x1fff'f4e8    0x14  Data  Lc  tasks.o [1]
+xFreeBytesRemaining     0x1fff'f418     0x4  Data  Lc  heap_4.o [1]
+xHeapStructSize              0x1d44     0x4  Data  Lc  heap_4.o [1]
+xIdleTaskHandle         0x1fff'f568     0x4  Data  Lc  tasks.o [1]
+xMinimumEverFreeBytesRemaining
+                        0x1fff'f41c     0x4  Data  Lc  heap_4.o [1]
+xNextTaskUnblockTime    0x1fff'f564     0x4  Data  Lc  tasks.o [1]
+xNumOfOverflows         0x1fff'f55c     0x4  Data  Lc  tasks.o [1]
+xNumberOfSuccessfulAllocations
+                        0x1fff'f420     0x4  Data  Lc  heap_4.o [1]
+xNumberOfSuccessfulFrees
+                        0x1fff'f424     0x4  Data  Lc  heap_4.o [1]
+xPendedTicks            0x1fff'f554     0x4  Data  Lc  tasks.o [1]
+xPendingReadyList       0x1fff'f504    0x14  Data  Lc  tasks.o [1]
+xPortStartScheduler           0xe67    0x2a  Code  Gb  port.o [1]
+xQueueGenericCreate          0x14a1    0x66  Code  Gb  queue.o [1]
+xQueueGenericReset           0x142d    0x74  Code  Gb  queue.o [1]
+xQueueGenericSend            0x1529   0x144  Code  Gb  queue.o [1]
+xQueueGenericSendFromISR
+                             0x166d    0xb8  Code  Gb  queue.o [1]
+xQueueReceive                0x1725   0x124  Code  Gb  queue.o [1]
+xQueueRegistry          0x1fff'f42c    0x40  Data  Gb  queue.o [1]
+xSchedulerRunning       0x1fff'f550     0x4  Data  Lc  tasks.o [1]
+xStart                  0x1fff'f40c     0x8  Data  Lc  heap_4.o [1]
+xSuspendedTaskList      0x1fff'f530    0x14  Data  Lc  tasks.o [1]
+xTaskCheckForTimeOut          0x96d    0x6c  Code  Gb  tasks.o [1]
+xTaskCreate                   0x411    0x66  Code  Gb  tasks.o [1]
+xTaskGetSchedulerState        0xab9    0x1e  Code  Gb  tasks.o [1]
+xTaskGetTickCount             0x719     0x6  Code  Gb  tasks.o [1]
+xTaskIncrementTick            0x749    0xd2  Code  Gb  tasks.o [1]
+xTaskPriorityDisinherit
+                              0xae5    0x6a  Code  Gb  tasks.o [1]
+xTaskRemoveFromEventList
+                              0x8dd    0x68  Code  Gb  tasks.o [1]
+xTaskResumeAll                0x665    0xb4  Code  Gb  tasks.o [1]
+xTasksWaitingTermination
+                        0x1fff'f518    0x14  Data  Lc  tasks.o [1]
+xTickCount              0x1fff'f548     0x4  Data  Lc  tasks.o [1]
+xTimerCreateTimerTask         0xf3d    0x34  Code  Gb  timers.o [1]
+xTimerGenericCommand          0xf71    0x56  Code  Gb  timers.o [1]
+xTimerQueue             0x1fff'f5a0     0x4  Data  Lc  timers.o [1]
+xTimerTaskHandle        0x1fff'f5a4     0x4  Data  Lc  timers.o [1]
+xYieldPending           0x1fff'f558     0x4  Data  Lc  tasks.o [1]
+
+
+[1] = F:\Libraries\Documents\IAR\rtos_p1\Debug\Obj
+[2] = dl6M_tln.a
+[3] = rt6M_tl.a
+[4] = shb_l.a
+
+  6'814 bytes of readonly  code memory
+     88 bytes of readonly  data memory
+  6'572 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
