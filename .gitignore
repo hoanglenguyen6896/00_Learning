@@ -1,2 +1,4 @@
-**/IN_DIR/**
-**/OUT_DIR/**
+**/OUTPUT_DIR
+**/OUT_DIR
+_tmp
+__pycache__
