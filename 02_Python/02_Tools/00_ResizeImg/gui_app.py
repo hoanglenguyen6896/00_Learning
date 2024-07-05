@@ -1,3 +1,4 @@
+#!python3
 
 import tkinter
 from tkinter import font
