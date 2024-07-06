@@ -1,0 +1,47 @@
+(None, None)
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+(None, None)
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+(None, None)
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+(None, None)
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________
+(None, None)
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+setText(self, a0: str): argument 1 has unexpected type 'list'
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+setText(self, a0: str): argument 1 has unexpected type 'list'
+____________________________________________________________
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________
+No logo will be added
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Rỗng luôn\\New Text Document.txt'
+cannot identify image file 'e:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/INPUT_DIR\\Để check thôi\\New Text Document.txt'
+____________________________________________________________

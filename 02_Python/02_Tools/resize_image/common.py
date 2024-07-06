@@ -1,6 +1,6 @@
 
 DEBUG=False
-DEBUG=True
+# DEBUG=True
 
 import os
 import shutil
@@ -78,6 +78,9 @@ DEFAULT_CFG = {
 
 NO_ERR = True
 
+def common__init():
+	pr("____________________________________________________________")
+
 
 """ Debug purpose """
 def pr(*args):
@@ -87,6 +90,11 @@ def pr(*args):
 			for txt in args:
 				print(type(txt), txt)
 			print("--")
+		else:
+			with open(os.path.join(SCRIPT_ABS_PATH, "log.txt"), "a", encoding="utf-8") as log_file:
+				for txt in args:
+					log_file.write(str(txt))
+					log_file.write("\n")
 	except Exception as e:
 		print("EEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRR")
 		print(e)
@@ -95,8 +103,11 @@ def pr(*args):
 """ Show error on a message box """
 def show_err(event):
 	caller = getframeinfo(stack()[1][0])
-	line_info = "%s:%d - %s" % (caller.filename, caller.lineno, event)
-	print(line_info)
+	if DEBUG:
+		line_info = "%s:%d - %s" % (caller.filename, caller.lineno, event)
+	else:
+		line_info = str(event)
+	# print(line_info)
 	try:
 		err = QMessageBox()
 		err.setText(line_info)

@@ -61,7 +61,7 @@ class ResizeImgApp():
 		def browse_path():
 			# cur_txt=self.ui.lineEdit_input.text()
 			_dir=QFileDialog(self.widget).getExistingDirectory(None, "Open input directory...", SCRIPT_ABS_PATH, QFileDialog.Option.ShowDirsOnly)
-			pr(_dir)
+			# pr(_dir)
 			if _dir != "":
 				self.ui.lineEdit_input.setText(_dir)
 			# else:
@@ -93,7 +93,7 @@ class ResizeImgApp():
 											"Open output directory...",
 											SCRIPT_ABS_PATH,
 											QFileDialog.Option.ShowDirsOnly)
-			pr(_dir)
+			# pr(_dir)
 			if _dir != "":
 				self.ui.lineEdit_output.setText(_dir)
 			# else:
@@ -146,7 +146,7 @@ class ResizeImgApp():
 											"Images (*.png *.jpg *.jpeg *.tiff \
 												*.tif *.bmp *.gif *.webp \
 													*.nef);;All (*)")
-			pr(_file)
+			# pr(_file)
 			if _file[0] != "":
 				self.ui.lineEdit_logo_path.setText(_file[0])
 		# Initial check value from config
@@ -195,17 +195,33 @@ class ResizeImgApp():
 			_aut = None
 			if self.ui.checkBox_author.checkState() == Qt.CheckState.Checked:
 				_aut = self.ui.lineEdit_author_name.text()
+			_logo = None
+			_logo_size = None
+			_logo_pos = (None, None)
+			if self.ui.checkBox_logo.checkState() == Qt.CheckState.Checked:
+				_logo = self.ui.lineEdit_logo_path.text()
+				_logo_size = self.ui.spinBox_logo_width.value()
+				_logo_pos = (self.ui.tableWidget_logo_pos.currentRow(),
+							self.ui.tableWidget_logo_pos.currentColumn())
+
 			img_process = img_resize.ImageWithPIL(
 				input_dir=self.ui.lineEdit_input.text(),
 				output_dir=self.ui.lineEdit_output.text(),
 				author_name=_aut,
 				img_width=self.ui.spinBox_img_width.value(),
-				logo_path=self.ui.lineEdit_logo_path.text(),
-				logo_width=self.ui.spinBox_logo_width.value(),
-				logo_pos=(self.ui.tableWidget_logo_pos.currentRow(),
-							self.ui.tableWidget_logo_pos.currentColumn())
+				logo_path=_logo,
+				logo_width=_logo_size,
+				logo_pos=_logo_pos
 			)
-			img_process.resize_all()
+			file_err = img_process.resize_all()
+			if file_err:
+				str_file = "File that can't be resized:"
+				for file in file_err:
+					str_file = str_file + "\n" + str(file)
+				err = QMessageBox()
+				err.setText(str_file)
+				err = err.exec()
+
 		self.ui.pushButton_EXECUTE.clicked.connect(EXE)
 		pass
 
@@ -250,7 +266,7 @@ class ResizeImgApp():
 					}
 				}
 			}
-			pr(self.ui.lineEdit_input.text())
+			# pr(self.ui.lineEdit_input.text())
 			file_ops.FileOps(SCRIPT_ABS_PATH, "cfg").backup_file()
 			file_ops.FileOps(SCRIPT_ABS_PATH, "cfg").update_cfg_file(cfg_dict)
 		except Exception as e:
@@ -294,6 +310,7 @@ class ResizeImgApp():
 
 
 if __name__ == '__main__':
+	common__init()
 	app = QApplication([])
 	# app.setQuitOnLastWindowClosed(False)
 	rdp_win = ResizeImgApp(app)

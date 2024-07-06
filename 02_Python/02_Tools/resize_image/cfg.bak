@@ -15,11 +15,11 @@
         "image_width": 750
     },
     "author": [
-        true,
-        "HHH"
+        false,
+        "YODY.VN"
     ],
     "logo": {
-        "logo_enable": true,
+        "logo_enable": false,
         "logo_width": 150,
         "logo_file": "E:/Learning/00_Git/00_Learning/02_Python/02_Tools/resize_image/logo/yody.png",
         "pos": {

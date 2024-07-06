@@ -29,7 +29,6 @@ class ImageWithPIL:
 		self.logo_width=logo_width
 		self.logo_data=None
 		self.logo_pos=logo_pos
-		pr(logo_pos)
 
 		""" Create out if need """
 		NO_ERR = safe_remove(self.output_dir)
@@ -55,20 +54,25 @@ class ImageWithPIL:
 
 	def resize_logo(self):
 		# if os.path.isfile(self.logo_path):
+		if (self.logo_path is None) or (not os.path.exists(self.logo_path)):
+			self.logo_data = None
+			pr("No logo will be added")
+			return
 		try:
 			self.logo_data = Image.open(self.logo_path)
 			self.logo_data = self.logo_data.convert("RGBA")
 			# Enlarge
-			if self.logo_data.width < LOGO_DEFAULT_WIDTH:
-				_ratio = LOGO_DEFAULT_WIDTH/self.logo_data.width
-				self.logo_data = self.logo_data.resize((LOGO_DEFAULT_WIDTH,
+			if self.logo_data.width < self.logo_width:
+				_ratio = self.logo_width/self.logo_data.width
+				self.logo_data = self.logo_data.resize((self.logo_width,
 									int(_ratio*self.logo_data.height)),
 									Image.Resampling.LANCZOS)
 			# Reduce
-			elif self.logo_data.width > LOGO_DEFAULT_WIDTH:
-				self.logo_data.thumbnail((LOGO_DEFAULT_WIDTH,
-					LOGO_DEFAULT_WIDTH))
+			elif self.logo_data.width > self.logo_width:
+				self.logo_data.thumbnail((self.logo_width,
+					self.logo_width))
 		except Exception as e:
+			self.logo_data = None
 			show_err(e)
 
 	def _string_to_exif_data(self, target_str):
@@ -113,14 +117,14 @@ class ImageWithPIL:
 	def resize_an_image(self, img_data: Image.Image, output_file_path: str):
 		rgb_img = img_data.convert("RGB")
 		# Enlarge
-		if rgb_img.width < IMG_DEFAULT_WIDTH:
-			_ratio = IMG_DEFAULT_WIDTH/rgb_img.width
-			rgb_img = rgb_img.resize((IMG_DEFAULT_WIDTH,
+		if rgb_img.width < self.img_width:
+			_ratio = self.img_width/rgb_img.width
+			rgb_img = rgb_img.resize((self.img_width,
 									int(_ratio*rgb_img.height)),
 									Image.Resampling.LANCZOS)
 		# Reduce
-		elif rgb_img.width > IMG_DEFAULT_WIDTH:
-			rgb_img.thumbnail((IMG_DEFAULT_WIDTH, 9999))
+		elif rgb_img.width > self.img_width:
+			rgb_img.thumbnail((self.img_width, 9999))
 
 		try:
 			exifdata = piexif.load(rgb_img.info["exif"])
@@ -142,17 +146,17 @@ class ImageWithPIL:
 		try:
 			# Dunp human readable exif to image exif
 			exif_bytes = piexif.dump(self._set_img_des(exifdata))
-			# paste logo
-			if self.logo_pos[1] == LOGO_LEFT:
-				_x_pos = 0
-			else:
-				_x_pos = rgb_img.width - self.logo_data.width
-			if self.logo_pos[0] == LOGO_TOP:
-				_y_pos = 0
-			else:
-				_y_pos = rgb_img.height - self.logo_data.height
 
 			if self.logo_data != None:
+				# paste logo
+				if self.logo_pos[1] == LOGO_LEFT:
+					_x_pos = 0
+				else:
+					_x_pos = rgb_img.width - self.logo_data.width
+				if self.logo_pos[0] == LOGO_TOP:
+					_y_pos = 0
+				else:
+					_y_pos = rgb_img.height - self.logo_data.height
 				rgb_img.paste(self.logo_data,
 								(_x_pos, _y_pos),
 								self.logo_data)
@@ -163,23 +167,34 @@ class ImageWithPIL:
 
 
 	def resize_each_subdir(self):
+		_file_err = []
 		for _img in next(os.walk(self.sub_input_path))[2]:
 			input_file_path = os.path.join(self.sub_input_path, _img)
 			# result = is_image(input_file_path)
-			input_file_data = Image.open(input_file_path)
-			if input_file_data.format \
-					in "PNG JPG JPEG TIFF TIF BMP GIF WEBP NEF":
-				output_file_path = os.path.join(self.sub_output_path,
-							unidecode(self.sub_cwd.replace(" ", "-").lower()) \
-							+ "-" + _img.split(".")[0] \
-							+ ".jpg")
-				self.resize_an_image(input_file_data, output_file_path)
+			try:
+				input_file_data = Image.open(input_file_path)
+				if input_file_data.format \
+						in "PNG JPG JPEG TIFF TIF BMP GIF WEBP NEF":
+					output_file_path = os.path.join(self.sub_output_path,
+								unidecode(self.sub_cwd.replace(" ", "-").lower()) \
+								+ "-" + _img.split(".")[0] \
+								+ ".jpg")
+					self.resize_an_image(input_file_data, output_file_path)
+			except Exception as e:
+				_file_err.append(input_file_path)
+				pr(e)
+		return _file_err
+		# if _file_err:
+		# 	show_err(f"File that cannot be processed {_file_err}")
 
 	def resize_all(self):
+		_file_err = []
 		self.resize_logo()
 		for _dir in self.input_subdirs:
 			self.sub_cwd = _dir
 			self.sub_input_path = os.path.join(self.input_dir, _dir)
 			self.sub_output_path = os.path.join(self.output_dir, _dir)
-			self.resize_each_subdir()
-		self.logo_data.close()
+			_file_err.extend(self.resize_each_subdir())
+		if self.logo_data is not None:
+			self.logo_data.close()
+		return _file_err
